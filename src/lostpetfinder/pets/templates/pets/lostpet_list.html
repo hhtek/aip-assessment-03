@@ -3,6 +3,7 @@
 
 {% block content %}
 <h1>Pets List</h1>
+<p><a href="register/">Register your pet now</a></p>
 <ul>
 {% for obj in object_list %}
   <li><a href="{{ obj.slug }}">{{ obj }}</a>
