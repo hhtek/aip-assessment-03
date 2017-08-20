@@ -31,22 +31,29 @@ class LostPet(models.Model):
         ('Female', 'Female'),
         ('Unknown', 'Unknown')
     )
-    STATUS_CHOICES = (
+    YES_NO_CHOICES = (
         ('Yes', 'Yes'),
         ('No', 'No'),
         ('Unknown', 'Unknown')
     )
+    STATUS_CHOICES = (
+        ('Lost', 'Lost'),
+        ('Found', 'Found'),
+        ('Registered', 'Registered')
+    )
     name            = models.CharField(max_length=120)
+    location        = models.CharField(max_length=120, null=True, blank=False)
     pet_type        = models.CharField(max_length=20, choices=(('Cat', 'Cat'), ('Dog', 'Dog')), null=True)
     colour          = models.CharField(max_length=20, choices=COLOUR_CHOICES, null=True)
     age             = models.IntegerField(null=True)
     size            = models.CharField(max_length=20, choices=SIZE_CHOICES, null=True)
     gender          = models.CharField(max_length=20, choices=GENDER_CHOICES, null=True)
-    desexed         = models.CharField(max_length=20, choices=STATUS_CHOICES, null=True, blank=True)
+    desexed         = models.CharField(max_length=20, choices=YES_NO_CHOICES, null=True, blank=True)
     collar          = models.CharField(max_length=120, null=True, blank=True)
-    microchipped    = models.CharField(max_length=20, choices=STATUS_CHOICES, null=True, blank=True)
+    microchipped    = models.CharField(max_length=20, choices=YES_NO_CHOICES, null=True, blank=True)
     microchipped_no = models.CharField(max_length=120, null=True, blank=True)
     missing_date    = models.DateTimeField(null=True, blank=False)
+    status          = models.CharField(max_length=20, default='Registered', choices=STATUS_CHOICES, blank=False)
     description     = models.TextField(max_length=200, null=True, blank=False)
     timestamp       = models.DateTimeField(auto_now_add=True, null=True)
     updated         = models.DateTimeField(auto_now=True, null=True)
