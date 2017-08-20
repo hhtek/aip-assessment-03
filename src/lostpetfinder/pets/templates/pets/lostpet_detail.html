@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block head_title %}Pets Details || {{ block.super }}{% endblock head_title %}
+{% block content %}
+<h1>Pet Details</h1>
+<h2>{{ object.name }} <small>{{ object.pet_type }}</small></h2>
+<p>{{ object.location }}</p>
+<p>{{ object.timestamp }}, updated {{ object.updated|timesince }} ago.</p>
+{% endblock %}
