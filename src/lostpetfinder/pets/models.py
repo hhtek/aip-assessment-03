@@ -2,6 +2,10 @@ from django.db import models
 
 # Create your models here.
 class LostPet(models.Model):
+    PET_CHOICES = (
+        ('Cat', 'Cat'),
+        ('Dog', 'Dog')
+    )
     COLOUR_CHOICES = (
         ('Black', 'Black'),
         ('Blue', 'Blue'),
@@ -43,7 +47,7 @@ class LostPet(models.Model):
     )
     name            = models.CharField(max_length=120)
     location        = models.CharField(max_length=120, null=True, blank=False)
-    pet_type        = models.CharField(max_length=20, choices=(('Cat', 'Cat'), ('Dog', 'Dog')), null=True)
+    pet_type        = models.CharField(max_length=20, choices=PET_CHOICES, null=True, blank=False)
     colour          = models.CharField(max_length=20, choices=COLOUR_CHOICES, null=True)
     age             = models.IntegerField(null=True)
     size            = models.CharField(max_length=20, choices=SIZE_CHOICES, null=True)
