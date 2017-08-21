@@ -1,4 +1,4 @@
-# from django.shortcuts import render
+from django.shortcuts import render
 from django.db.models import Q # filter using operators '&' or '|'
 # from django.http import HttpResponse
 # from django.shortcuts import render, get_object_or_404

@@ -1,8 +1,8 @@
-from django import forms
+from django.forms import ModelForm, Textarea, SelectDateWidget
 
 from .models import LostPet
 
-class LostPetRegistrationForm(forms.ModelForm):
+class LostPetRegistrationForm(ModelForm):
     class Meta:
         model = LostPet
         fields = [
@@ -21,3 +21,6 @@ class LostPetRegistrationForm(forms.ModelForm):
             'status',
             'description'
         ]
+        widgets = {
+            'missing_date': SelectDateWidget,
+        }

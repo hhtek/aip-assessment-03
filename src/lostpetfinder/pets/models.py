@@ -3,7 +3,7 @@ from django.db.models.signals import pre_save, post_save
 
 from lostpetfinder.utils import unique_slug_generator
 
-# Create your models here.
+# LostPet data model to store pet details
 class LostPet(models.Model):
     PET_CHOICES = (
         ('Cat', 'Cat'),
