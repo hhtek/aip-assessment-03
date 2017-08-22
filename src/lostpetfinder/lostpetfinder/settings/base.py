@@ -51,6 +51,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'lostpetfinder.urls'
+LOGIN_URL = '/login/'
 
 TEMPLATES = [
     {

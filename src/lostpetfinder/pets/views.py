@@ -1,8 +1,5 @@
 from django.shortcuts import render
 from django.db.models import Q # filter using operators '&' or '|'
-# from django.http import HttpResponse
-# from django.shortcuts import render, get_object_or_404
-# from django.views import View
 from django.views.generic import (
     TemplateView,
     ListView,
@@ -11,11 +8,10 @@ from django.views.generic import (
     )
 
 from .forms import LostPetRegistrationForm
-from pets.models import LostPet
+from .models import LostPet
 
-# Lost pet list view
+# Lost pet list view: display list of pets
 class LostPetListView(ListView):
-    #template_name = 'pets/lostpet_list.html'
     def get_queryset(self):
         slug = self.kwargs.get("slug")
         if slug:
@@ -25,16 +21,14 @@ class LostPetListView(ListView):
             )
         else:
             queryset = LostPet.objects.all()
-            print(queryset)
         return queryset
 
-# Lost pet detail view
+# Lost pet detail view: display specific pet details
 class LostPetDetailView(DetailView):
-    #template_name = 'pets/lostpet_list.html'
-    #model = LostPet
-    queryset = LostPet.objects.all()
-# Lost pet create view which is used for lost pet registration
+    model = LostPet
+
+# Lost pet create view: used for pet registration 
 class LostPetCreateView(CreateView):
     form_class = LostPetRegistrationForm
     template_name = 'pets/form.html'
-    success_url = "/pets/"
+    success_url = '/pets/'
