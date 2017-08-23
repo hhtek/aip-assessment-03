@@ -13,9 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic import TemplateView
+
+from pets import urls
 
 from pets.views import (
     LostPetListView,
@@ -25,11 +27,11 @@ from pets.views import (
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', TemplateView.as_view(template_name='home.html')),
-    url(r'^pets/$', LostPetListView.as_view()),
-    url(r'^pets/register/$', LostPetCreateView.as_view()),
-    url(r'^reunited-pets/$', LostPetListView.as_view()),
-    url(r'^pets/(?P<slug>[\w-]+)/$', LostPetDetailView.as_view()),
-    url(r'^about/$', TemplateView.as_view(template_name='about.html')),
-    url(r'^contact/$', TemplateView.as_view(template_name='contact.html')),
+    url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
+    url(r'^pets/', include('pets.urls', namespace='pets')),
+    url(r'^reunited-pets/$', LostPetListView.as_view(), name='reunited-pets'),
+    url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
+    url(r'^contact/$', TemplateView.as_view(template_name='contact.html'), name='contact'),
+    url(r'^login/$', TemplateView.as_view(template_name='login.html'), name='login'),
+    url(r'^join/$', TemplateView.as_view(template_name='join.html'), name='join')
 ]

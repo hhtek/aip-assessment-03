@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import pre_save, post_save
 
@@ -66,25 +67,22 @@ class LostPet(models.Model):
     updated         = models.DateTimeField(auto_now=True, null=True)
     slug            = models.SlugField(null=True, blank=True)
 
+    # Display LostPet object with its name field
     def __str__(self):
         return self.name
 
+    # Redirect to lostpet_detail.html after new pet is created
+    def get_absolute_url(self):
+        return reverse('pets:detail', kwargs={'slug': self.slug})
+
+    # title: aka of name field to be used with unique_slug_generator()
     @property
     def title(self):
         return self.name
 
 def rl_pre_save_receiver(sender, instance, *args, **kwargs):
-    print('saving...')
-    print(instance.timestamp)
     if not instance.slug:
         instance.slug = unique_slug_generator(instance)
-
-# def rl_post_save_receiver(sender, instance, created, *args, **kwargs):
-#     print('saved')
-#     print(instance.timestamp)
-#     if not instance.slug:
-#         instance.slug = unique_slug_generator(instance)
-#         instance.save()
 
 pre_save.connect(rl_pre_save_receiver, sender=LostPet)
 #post_save.connect(rl_post_save_receiver, sender=LostPet)
