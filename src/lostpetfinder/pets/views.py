@@ -27,8 +27,8 @@ class LostPetListView(ListView):
 class LostPetDetailView(DetailView):
     model = LostPet
 
-# Lost pet create view: used for pet registration 
+# Lost pet create view: used for pet registration
 class LostPetCreateView(CreateView):
     form_class = LostPetRegistrationForm
-    template_name = 'pets/form.html'
+    template_name = 'pets/lostpet_create.html'
     success_url = '/pets/'
