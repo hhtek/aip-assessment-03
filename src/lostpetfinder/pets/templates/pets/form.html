@@ -7,6 +7,6 @@
   <form method="POST">
     {% csrf_token %} <!-- Cross Site Request Forgery protection -->
     {{ form.as_p }}
-  <button type="submit">Register</button>
+  <button type="submit">Save</button>
 </form>
 {% endblock %}
