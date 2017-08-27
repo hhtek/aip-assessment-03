@@ -1,36 +1,101 @@
-from django.shortcuts import render
+# Class base view mixins that verified current authenticated user
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.db.models import Q # filter using operators '&' or '|'
+from django.shortcuts import render
+from django.urls import reverse_lazy
+
+# Django class base views
 from django.views.generic import (
     ListView,
+    DetailView,
     CreateView,
     UpdateView,
-    DetailView
-    )
+    DeleteView,
+)
 
-from .forms import LostPetRegistrationForm
-from .models import LostPet
+from .forms import PetRegistrationForm
 
-# Display list of lost pets
-class LostPetListView(ListView):
-    queryset = LostPet.objects.filter(status__iexact='lost')
+from .models import Pet
+
+# Display list of  pets
+class PetListView(ListView):
+    # Get pets owned by the authenticated user
+    def get_queryset(self):
+        return Pet.objects.filter(owner=self.request.user)
 
 # Display list of reunited-pets
 class ReunitedPetsListView(ListView):
-    queryset = LostPet.objects.filter(status__iexact='found')
+    def get_queryset(self):
+        return Pet.objects.filter(status__iexact='found')
 
 # Display specific pet details
-class LostPetDetailView(DetailView):
-    model = LostPet
+class PetDetailView(DetailView):
+    def get_queryset(self):
+        return Pet.objects.filter(owner=self.request.user)
 
-# Lost pet registration form
-class LostPetCreateView(CreateView):
-    template_name = 'pets/form.html'
-    form_class = LostPetRegistrationForm
-    success_url = '/pets/'
+#  Pet registration
+class PetCreateView(LoginRequiredMixin, CreateView):
+    form_class = PetRegistrationForm
+    template_name = 'pet-form.html'
+    login_url = '/login/' # Redirect to login url if not authenticated
 
-# Lost pet update form
-class LostPetUpdateView(UpdateView):
-    model = LostPet
-    template_name = 'pets/form.html'
-    form_class = LostPetRegistrationForm
-    success_url = '/pets/'
+    # Get pets owned by the authenticated user
+    def get_queryset(self):
+        return Pet.objects.filter(owner=self.request.user)
+
+    # Form Validation
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.owner = self.request.user # current authenticated user
+        return super(PetCreateView, self).form_valid(form)
+
+    # Return the key word argurments for instantiating the form
+    def get_form_kwargs(self):
+        kwargs = super(PetCreateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    # Get context data of the form
+    def get_context_data(self, *args, **kwargs):
+        context = super(PetCreateView, self).\
+            get_context_data(*args, **kwargs)
+        context['title'] = 'Pet Registration'
+        return context
+
+#  Pet update
+class PetUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = PetRegistrationForm
+    template_name = 'pet-form.html'
+
+    # Get pets owned by the authenticated user
+    def get_queryset(self):
+        return Pet.objects.filter(owner=self.request.user)
+
+    # Return the key word argurments for instantiating the form
+    def get_form_kwargs(self):
+        kwargs = super(PetUpdateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    # Get context data of the form
+    def get_context_data(self, *args, **kwargs):
+        context = super(PetUpdateView, self).\
+            get_context_data(*args, **kwargs)
+        context['title'] = 'Update Pet'
+        return context
+
+# Pet deletion
+class PetDeleteView(LoginRequiredMixin, DeleteView):
+    success_url = reverse_lazy('pets:list') # Return to pets list
+
+    # Get pets owned by the authenticated user
+    def get_queryset(self):
+        return Pet.objects.filter(owner=self.request.user)
+
+    # Get context data of the form
+    def get_context_data(self, *args, **kwargs):
+        context = super(PetDeleteView, self).\
+            get_context_data(*args, **kwargs)
+        context['title'] = 'Remove Pet Listing'
+        return context

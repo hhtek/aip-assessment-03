@@ -1,10 +1,10 @@
 from django.forms import ModelForm, Textarea, SelectDateWidget
 
-from .models import LostPet
+from .models import Pet
 
-class LostPetRegistrationForm(ModelForm):
+class PetRegistrationForm(ModelForm):
     class Meta:
-        model = LostPet
+        model = Pet
         fields = [
             'name',
             'location',
@@ -24,3 +24,7 @@ class LostPetRegistrationForm(ModelForm):
         widgets = {
             'missing_date': SelectDateWidget,
         }
+
+    # Passing key word argurments to PetRegistrationForm
+    def __init__(self, user=None, *args, **kwargs):
+        super(PetRegistrationForm, self).__init__(*args, **kwargs)

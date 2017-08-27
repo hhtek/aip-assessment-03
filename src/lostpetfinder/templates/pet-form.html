@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
-{% block head_title %}Lost Pet Registraion || {{ block.super }}{% endblock head_title %}
+{% block head_title %}{{ title }} || {{ block.super }}{% endblock head_title %}
 
 {% block content %}
-<h1>Lost Pet Registration</h1>
+<h3>{{ title }}</h3>
+{% if form.errors %}
+  {{ form.errors }}
+{% endif %}
   <form method="POST">
     {% csrf_token %} <!-- Cross Site Request Forgery protection -->
     {{ form.as_p }}

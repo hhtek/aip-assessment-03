@@ -42,12 +42,45 @@ TODO: List of APIs which are used in the project.
 Describe the coding styles which are used in the project for readability and code maintenance.
 
 ### Python
+
+Reference: https://www.python.org/dev/peps/pep-0008/
+
+1. Indentation using SPACES with the size of 4
+    ```python
+    urlpatterns = [
+        url(r'^$', PetListV iew.as_view(), name='list'),
+        url(r'^register/$', PetCreateView.as_view(), name='create'),
+        url(r'^(?P<pk>\d+)/edit/$', PetUpdateView.as_view(), name='update'),
+        url(r'^(?P<pk>\d+)/$', PetDetailView.as_view(), name='detail'),
+    ]
+    ```
+
+1. Use single quote for STRING
+    ```python
+    context['title'] = 'Update Pet'
+    template_name = 'pet-form.html'
+    ```
+    
+1. Use trailing comma when listing the values, importing libraries line by line. For clarity, it is recommended to surround the latter line in (technically redundant) parentheses.
+    ```python
+    PET_CHOICES = (
+        ('Cat', 'Cat'),
+        ('Dog', 'Dog'),
+    )
+    # Django class base views
+    from django.views.generic import (
+        ListView,
+        DetailView,
+        CreateView,
+        UpdateView,
+    )
+    ```
 1. Tuple declaration<br/>
     Tubple declaration with all CAPITAL LETTERS
     ```python
      PET_CHOICES = (
          ('Cat', 'Cat'),
-         ('Dog', 'Dog')
+         ('Dog', 'Dog'),
      )
     ```
 2. Use triple quote comment for group declarations such as list/tuple , fields, or multiple lines comment.
@@ -57,7 +90,7 @@ Describe the coding styles which are used in the project for readability and cod
     Tubple declaration with all CAPITAL LETTERS.
     """
     ```
-3. Imported libraries are categorised, sorted in alphabetical order, and separated by an empty line.
+3. Imported libraries are categorised, sorted in alphabetical order, and separated by an empty line.<br/>
     Below is an example of grouping django's libraries, and project's libraries/functions
     ```python
     from django.conf import settings

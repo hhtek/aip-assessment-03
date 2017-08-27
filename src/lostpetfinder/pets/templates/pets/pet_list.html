@@ -3,10 +3,10 @@
 
 {% block content %}
 <h1>Pets List</h1>
-<p><a href="{% url "pets:create" %}">Register your pet now</a></p>
+<p><a href="{% url "pets:create" %}">Register your new pet</a></p>
 <ul>
 {% for obj in object_list %}
-  <li><a href="{{ obj.get_absolute_url }}">{{ obj }}</a>
+  <li><a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a>
     {{ obj.location }} {{ obj.timestamp }} {{ obj.updated }}</li>
 {% endfor %}
 </ul>
