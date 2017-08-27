@@ -58,6 +58,7 @@ Describe the coding styles which are used in the project for readability and cod
     """
     ```
 3. Imported libraries are categorised, sorted in alphabetical order, and separated by an empty line.
+    Below is an example of grouping django's libraries, and project's libraries/functions
     ```python
     from django.conf import settings
     from django.core.urlresolvers import reverse
