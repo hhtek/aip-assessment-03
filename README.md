@@ -42,7 +42,21 @@ TODO: List of APIs which are used in the project.
 Describe the coding styles which are used in the project for readability and code maintenance.
 
 ### Python
-
+1. Tuple declaration<br/>
+    Tubple declaration with all CAPITAL LETTERS
+    ```python
+     PET_CHOICES = (
+         ('Cat', 'Cat'),
+         ('Dog', 'Dog')
+     )
+    ```
+2. Use triple quote comment for group declarations such as list/tuple , fields, or multiple lines comment.
+    ```python
+    """
+    Pre-defined TUPLES
+    Tubple declaration with all CAPITAL LETTERS.
+    """
+    ```
 ### HTML
 
 ### JavaScript
