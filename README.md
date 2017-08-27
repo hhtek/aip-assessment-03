@@ -60,7 +60,7 @@ Reference: https://www.python.org/dev/peps/pep-0008/
     context['title'] = 'Update Pet'
     template_name = 'pet-form.html'
     ```
-    
+
 1. Use trailing comma when listing the values, importing libraries line by line. For clarity, it is recommended to surround the latter line in (technically redundant) parentheses.
     ```python
     PET_CHOICES = (
