@@ -57,6 +57,15 @@ Describe the coding styles which are used in the project for readability and cod
     Tubple declaration with all CAPITAL LETTERS.
     """
     ```
+3. Imported libraries are categorised, sorted in alphabetical order, and separated by an empty line.
+    ```python
+    from django.conf import settings
+    from django.core.urlresolvers import reverse
+    from django.db import models
+    from django.db.models.signals import pre_save, post_save
+
+    from lostpetfinder.utils import unique_slug_generator
+    ```
 ### HTML
 
 ### JavaScript
