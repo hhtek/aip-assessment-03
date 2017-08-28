@@ -131,6 +131,52 @@ Reference: https://google.github.io/styleguide/htmlcssguide.html
 		<td>$ 4.50
 	</table>
 	```
+
+1. HTML Quotation Marks.<br/>	
+	When quoting attributes values, use double quotation marks.<br/>
+	Use double ("") rather than single quotation marks ('') around attribute values.<br/>
+	```
+	<a class="maia-button maia-button-secondary">Sign in</a>	
+	```
+
+1.  CSS Validity<br/>
+	Use valid CSS where possible.<br/>
+	Unless dealing with CSS validator bugs or requiring proprietary syntax, use valid CSS code.	<br/>
+	
+1.  ID and Class Name Style<br/>
+	Use ID and class names that are as short as possible but as long as necessary.<br/>
+	Try to convey what an ID or class is about while being as brief as possible.<br/>
+	```
+	#nav {}
+	.author {}
+	```
+
+1. CSS Declaration Order<br/>
+	Alphabetize declaration	
+	```
+	background: fuchsia;
+	border: 1px solid;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	color: black;
+	text-align: center;
+	text-indent: 2em;
+	```
+	
+1. Block Content Indentation</br>
+	Indent all block content.
+	```	
+	@media screen, projection {
+
+		html {
+			background: #fff;
+			color: #444;
+		}
+
+	}
+	```
+	
 ### JavaScript
 
 **[Back to top](#table-of-contents)**
