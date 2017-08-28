@@ -20,6 +20,7 @@ from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 
 from pets.views import ReunitedPetsListView
+from accounts.views import RegisterView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,6 +30,7 @@ urlpatterns = [
     url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
     url(r'^contact/$', TemplateView.as_view(template_name='contact.html'), name='contact'),
     url(r'^login/$', LoginView.as_view(), name='login'),
+    url(r'^register/$', RegisterView.as_view(), name='register'),
     url(r'^logout/$', LogoutView.as_view(next_page=reverse_lazy('login')), name='logout'),
     url(r'^join/$', TemplateView.as_view(template_name='join.html'), name='join')
 ]
