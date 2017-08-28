@@ -100,7 +100,9 @@ Reference: https://www.python.org/dev/peps/pep-0008/
 
     from lostpetfinder.utils import unique_slug_generator
     ```
-### HTML
+### HTML & CSS
+
+Reference: https://google.github.io/styleguide/htmlcssguide.html
 
 ### JavaScript
 

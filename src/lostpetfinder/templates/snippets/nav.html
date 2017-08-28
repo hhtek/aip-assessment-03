@@ -1,11 +1,14 @@
-<div class="container">
+<div class="header">
   <h1>LostPetFinder.com.au</h1>
   <a href="{% url "home" %}">Home</a>&nbsp;|&nbsp;
   <a href="{% url "pets:list" %}">Lost Pets</a>&nbsp;|&nbsp;
   <a href="{% url "reunited-pets" %}">Reunited Pets</a>&nbsp;|&nbsp;
   <a href="{% url "about" %}">About</a>&nbsp;|&nbsp;
   <a href="{% url "contact" %}">Contact</a>&nbsp;|&nbsp;
+  {% if user.is_authenticated %}
+  <a href="{% url "logout" %}">Logout</a>
+  {% else %}
   <a href="{% url "login" %}">Sign in</a>&nbsp;|&nbsp;
   <a href="{% url "join" %}">Join</a>&nbsp;|&nbsp;
-  <a href="{% url "logout" %}">Logout</a>
+  {% endif %}
 </div>
