@@ -168,17 +168,38 @@ Reference: https://google.github.io/styleguide/htmlcssguide.html
 	Indent all block content.
 	```	
 	@media screen, projection {
-
 		html {
 			background: #fff;
 			color: #444;
 		}
-
 	}
 	```
 	
 ### JavaScript
 
+Reference: https://www.w3schools.com/js/js_conventions.asp
+
+1. 	Variable Names<br/>
+	All names start with a letter.
+	```	
+	firstName = "John";
+	lastName = "Doe";
+	```	
+
+1.	Spaces Around Operators<br/>
+	Always put spaces around operators ( = + - * / ), and after commas
+	```	
+	var x = y + z;
+	var values = ["Volvo", "Saab", "Fiat"];
+	```
+
+1.	Code Indentation<br/>
+	4 spaces for indentation of code blocks
+	```	
+	function toCelsius(fahrenheit) {
+		return (5 / 9) * (fahrenheit - 32);
+	}
+	```	
 **[Back to top](#table-of-contents)**
 
 ## History
