@@ -104,6 +104,33 @@ Reference: https://www.python.org/dev/peps/pep-0008/
 
 Reference: https://google.github.io/styleguide/htmlcssguide.html
 
+1. Use a new line for every block, list, or table element, and indent every such child element.<br/>
+	Independent of the styling of an element (as CSS allows elements to assume a different role per display property), put every block, list, or table element on a new line.<br/>
+	Also, indent them if they are child elements of a block, list, or table element.<br/>
+	```
+	<blockquote>
+	<p><em>Space</em>, the final frontier.</p>
+	</blockquote>
+	```
+	```
+	<ul>
+	<li>Moe
+	<li>Larry
+	<li>Curly
+	</ul>
+	```
+	```
+	<table>
+	<thead>
+		<tr>
+		<th scope="col">Income
+		<th scope="col">Taxes
+	<tbody>
+		<tr>
+		<td>$ 5.00
+		<td>$ 4.50
+	</table>
+	```
 ### JavaScript
 
 **[Back to top](#table-of-contents)**
