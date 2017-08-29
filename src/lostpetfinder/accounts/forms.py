@@ -35,6 +35,6 @@ class RegisterForm(forms.ModelForm):
         user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
-            print(user)
-            user.profile.send_activation_email()
+            print(user.profile)
+            # user.profile.send_activation_email()
         return user
