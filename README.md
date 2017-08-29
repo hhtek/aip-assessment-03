@@ -18,10 +18,10 @@ TODO: Describe the depenencies list, package requirements
 
 ### Installation
 
-OS : Linux Ubuntu
-Front-end Framework : Bootstrap
-Back-end Framework : Django
-Database : Mysql
+OS : Linux Ubuntu<br/>
+Front-end Framework : Bootstrap<br/>
+Back-end Framework : Django<br/>
+Database : Mysql<br/>
 
 ### Usage
 
