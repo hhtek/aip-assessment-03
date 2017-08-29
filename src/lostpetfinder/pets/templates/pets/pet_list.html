@@ -4,10 +4,13 @@
 {% block content %}
 <h1>Pets List</h1>
 <p><a href="{% url "pets:create" %}">Register your new pet</a></p>
-<ul>
+<div class="row">
 {% for obj in object_list %}
-  <li><a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a>
-    {{ obj.location }} {{ obj.timestamp }} {{ obj.updated }}</li>
-{% endfor %}
-</ul>
+            <div class="col-xs-6 col-lg-4">
+              <h2>{{ obj.name }}</h2>
+              <p>{{ obj.location }} {{obj.timestamp }} {{ obj.updated }}</p>
+              <p><a class="btn btn-default" href="{{ obj.get_absolute_url }}" role="button">View details &raquo;</a></p>
+            </div>
+            {% endfor %}
+</div>
 {% endblock %}
