@@ -18,7 +18,10 @@ TODO: Describe the depenencies list, package requirements
 
 ### Installation
 
-TODO: Describe the installation process
+OS : Linux Ubuntu
+Front-end Framework : Bootstrap
+Back-end Framework : Django
+Database : Mysql
 
 ### Usage
 
