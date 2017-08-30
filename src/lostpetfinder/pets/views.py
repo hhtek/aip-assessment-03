@@ -17,11 +17,16 @@ from .forms import PetRegistrationForm
 
 from .models import Pet
 
-# Display list of  pets
+# Display list of pets
 class PetListView(ListView):
     # Get pets owned by the authenticated user
     def get_queryset(self):
         return Pet.objects.filter(owner=self.request.user)
+
+# Display list of pets
+class LostPetListView(ListView):
+    def get_queryset(self):
+        return Pet.objects.filter(status__iexact='lost')
 
 # Display list of reunited-pets
 class ReunitedPetsListView(ListView):
@@ -31,7 +36,8 @@ class ReunitedPetsListView(ListView):
 # Display specific pet details
 class PetDetailView(DetailView):
     def get_queryset(self):
-        return Pet.objects.filter(owner=self.request.user)
+        slug = self.kwargs.get('slug')
+        return Pet.objects.filter(slug=slug)
 
 #  Pet registration
 class PetCreateView(LoginRequiredMixin, CreateView):

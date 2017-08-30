@@ -2,11 +2,15 @@
 {% block head_title %}Pets Details || {{ block.super }}{% endblock head_title %}
 {% block content %}
   <h1>Pet Details</h1>
+  <!-- Check if the selected pet is owned by authenticated user -->
+  {% if user.is_authenticated and user == object.owner %}
   <p>
     <a href="{{ object.get_absolute_url }}edit/">Update your pet</a>&nbsp;|&nbsp;
     <a href="{{ object.get_absolute_url }}delete/">Remove listing</a>
   </p>
+  {% endif %}
   <h2>{{ object.name }} <small>{{ object.pet_type }}</small></h2>
+  <p>{{ object.owner }}</p>
   <p>{{ object.location }}</p>
   <p>{{ object.timestamp }}, updated {{ object.updated|timesince }} ago.</p>
 {% endblock %}

@@ -53,7 +53,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'lostpetfinder.urls'
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/account/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

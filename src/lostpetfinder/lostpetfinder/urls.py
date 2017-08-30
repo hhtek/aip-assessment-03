@@ -15,12 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 
 from pets.views import ReunitedPetsListView
-# from accounts.views import RegisterView
 
 urlpatterns = [
     url(r'^', include('accounts.urls')),

@@ -1,0 +1,27 @@
+{% extends  "base.html" %}
+{% block head_title %}My Account || {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+<div class="jumbotron">
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="#">My Pets</a></li>
+        <li><a href="#">My Profile</a></li>
+      </ul>
+    </div><!-- /.container-fluid -->
+  </nav>
+  
+  <p><a href="{% url "pets:create" %}">Register your new pet</a></p>
+  <div class="row">
+    {% for obj in object_list %}
+    <div class="col-xs-6 col-lg-4">
+      <h2>{{ obj.name }}</h2>
+      <p>{{ obj.location }} {{obj.timestamp }} {{ obj.updated }}</p>
+      <p><a class="btn btn-default" href="{{ obj.get_absolute_url }}" role="button">View details &raquo;</a></p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}
