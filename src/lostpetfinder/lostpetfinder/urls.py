@@ -18,13 +18,14 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 
-from pets.views import ReunitedPetsListView
+from pets.views import LostPetListView, ReunitedPetsListView
 
 urlpatterns = [
     url(r'^', include('accounts.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
-    url(r'^pets/', include('pets.urls', namespace='pets')),
+    url(r'^finder/pets/', include('pets.urls', namespace='pets')), # authenticated owner urls
+    url(r'^pets/$', LostPetListView.as_view(), name='lost-pets'),
     url(r'^reunited-pets/$', ReunitedPetsListView.as_view(), name='reunited-pets'),
     url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
     url(r'^contact/$', TemplateView.as_view(template_name='contact.html'), name='contact'),

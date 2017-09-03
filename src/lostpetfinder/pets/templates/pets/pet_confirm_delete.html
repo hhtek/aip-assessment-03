@@ -1,4 +1,10 @@
-<form action="" method="post">{% csrf_token %}
+{% extends "base.html" %}
+{% block head_title %}{{ title }}|| {{ block.super }}{% endblock head_title %}
+{% block content %}
+  <h1>Pet Details</h1>
+  <form action="" method="post">{% csrf_token %}
     <p>Are you sure you want to remove listing of the pet "{{ object.name }}"?</p>
-    <input type="submit" value="Confirm" />
-</form>
+    <input class='btn btn-primary' type="submit" value="Confirm" />
+    <a class='btn btn-default' href="{% url 'pets:detail' object.slug %}">Cancel</a>
+  </form>
+{% endblock %}

@@ -2,21 +2,19 @@
 {% block head_title %}Welcome || {{ block.super }}{% endblock head_title %}
 
 {% block content %}
-{{ block.super }}
 <div class="jumbotron">
   <h2>Welcome to LostPetFinder.com.au</h2>
   <p>Our Website is...</p>
   <p><a class="btn btn-primary btn-lg" href="{% url "about" %}" role="button">Learn more</a></p>
 </div>
 <div class="row">
-    <div class="col-xs-10 col-lg-6">
-        <h2>Lost your pet?</h2>
-        <p><a href={% url "pets:create" %} class="btn btn-primary">Find Your Pet</a></p>
-    </div>
-    <div class="col-xs-10 col-lg-6">
-        <h2>Join in!</h2>
-        <p><a href="{% url "register" %}" class="btn btn-primary">JOIN</a></p>
-    </div>
+  <div class="col-xs-10 col-lg-6">
+    <h2>Lost your pet?</h2>
+    <p><a href={% url "pets:create" %} class="btn btn-primary">Find Your Pet</a></p>
+  </div>
+  <div class="col-xs-10 col-lg-6">
+    <h2>Join in!</h2>
+    <p><a href="{% url "register" %}" class="btn btn-primary">JOIN</a></p>
+  </div>
 </div>
-{{ block.super }}
 {% endblock content %}

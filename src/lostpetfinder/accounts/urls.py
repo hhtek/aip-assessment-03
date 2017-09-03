@@ -19,7 +19,7 @@ urlpatterns = [
     url(r'^login/$', LoginView.as_view(template_name='accounts/login.html'), name='login'),
     url(r'^logout/$', LogoutView.as_view(next_page=reverse_lazy('login')), name='logout'),
     url(r'^register/$', RegisterView.as_view(), name='register'),
-    url(r'^account/$', TemplateView.as_view(template_name='accounts/account.html'), name='account'),
+    url(r'^finder/account/$', TemplateView.as_view(template_name='accounts/profile.html'), name='profile'),
 
     url(r'^password_change/$',
         PasswordChangeView.as_view(template_name='accounts/password_change_form.html'),

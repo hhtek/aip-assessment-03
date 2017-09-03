@@ -9,7 +9,7 @@
   <form method="post" action="{% url 'register' %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Register" />
+    <input type="submit" value="Sign up" />
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
 </di>

@@ -1,8 +1,7 @@
-from django.forms import ModelForm, Textarea, SelectDateWidget
+from django import forms
+from pets.models import Pet
 
-from .models import Pet
-
-class PetRegistrationForm(ModelForm):
+class PetRegistrationForm(forms.ModelForm):
     class Meta:
         model = Pet
         fields = [
@@ -22,7 +21,8 @@ class PetRegistrationForm(ModelForm):
             'description'
         ]
         widgets = {
-            'missing_date': SelectDateWidget,
+            'name': forms.TextInput(attrs={'class':'textinputclass'}), # widget connecting to CSS
+            'missing_date': forms.SelectDateWidget,
         }
 
     # Passing key word argurments to PetRegistrationForm

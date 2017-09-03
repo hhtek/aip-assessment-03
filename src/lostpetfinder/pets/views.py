@@ -4,6 +4,8 @@ from django.db.models import Q # filter using operators '&' or '|'
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 
+from django.core.urlresolvers import reverse
+
 # Django class base views
 from django.views.generic import (
     ListView,
@@ -18,7 +20,7 @@ from .forms import PetRegistrationForm
 from .models import Pet
 
 # Display list of pets
-class PetListView(ListView):
+class OwnerPetListView(ListView):
     # Get pets owned by the authenticated user
     def get_queryset(self):
         return Pet.objects.filter(owner=self.request.user)
@@ -42,7 +44,7 @@ class PetDetailView(DetailView):
 #  Pet registration
 class PetCreateView(LoginRequiredMixin, CreateView):
     form_class = PetRegistrationForm
-    template_name = 'pet-form.html'
+    template_name = 'pets/pet_form.html'
     login_url = '/login/' # Redirect to login url if not authenticated
 
     # Get pets owned by the authenticated user
@@ -71,7 +73,7 @@ class PetCreateView(LoginRequiredMixin, CreateView):
 #  Pet update
 class PetUpdateView(LoginRequiredMixin, UpdateView):
     form_class = PetRegistrationForm
-    template_name = 'pet-form.html'
+    template_name = 'pets/pet_form.html'
 
     # Get pets owned by the authenticated user
     def get_queryset(self):
@@ -92,7 +94,7 @@ class PetUpdateView(LoginRequiredMixin, UpdateView):
 
 # Pet deletion
 class PetDeleteView(LoginRequiredMixin, DeleteView):
-    success_url = reverse_lazy('pets:list') # Return to pets list
+    success_url = reverse_lazy('pets:ownerpets-list') # Return to pets list
 
     # Get pets owned by the authenticated user
     def get_queryset(self):

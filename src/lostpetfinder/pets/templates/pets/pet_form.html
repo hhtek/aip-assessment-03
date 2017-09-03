@@ -1,3 +1,5 @@
+{# This pet_form.html is used for creating, updating, and deleting pet. #}
+
 {% extends "base.html" %}
 
 {% block head_title %}{{ title }} || {{ block.super }}{% endblock head_title %}
@@ -10,6 +12,7 @@
   <form method="POST">
     {% csrf_token %} <!-- Cross Site Request Forgery protection -->
     {{ form.as_p }}
-  <button type="submit">Save</button>
+  <button class='btn btn-primary' type="submit">Save</button>
+  <a class='btn btn-default' href="{% url 'pets:list' %}">Cancel</a>
 </form>
 {% endblock %}
