@@ -1,25 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="jumbotron">
-  {% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
+
+{% if form.errors %}
+  <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+{% if next %}
+  {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
   {% endif %}
-  {% if next %}
-    {% if user.is_authenticated %}
-      <p>Your account doesn't have access to this page. To proceed,
-      please login with an account that has access.</p>
-      {% else %}
-      <p>Please login to see this page.</p>
-    {% endif %}
-  {% endif %}
-  <form class="form-horizontal" method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class="btn btn-primary" value="Login" />
-    <input type="hidden" name="next" value="{{ next }}" />
+{% endif %}
+<div class="row">
+  <form class="form-signin" method="post" action="{% url 'login' %}">{% csrf_token %}
+    <h2 class="form-signin-heading text-center">Log In</h2><br/>
+    <!--{{ form.as_p }}-->
+    <div class="col-xs-4 col-lg-6">
+      <label for="{{ form.username.id_for_label }}">User Name :</label>
+      <input class="form-control" id="{{ form.username.id_for_label }}" maxlength="15" name="{{ form.username.html_name }}" type="text" />
+      <label for="{{ form.password.id_for_label }}">Password :</label>
+      <input class="form-control" id="{{ form.password.id_for_label }}" maxlength="20" name="{{ form.password.html_name }}" type="password" /><br/>
+      <div class="col-xs-4 col-lg-12 text-center">
+        <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+      </div>
+      <input type="hidden" name="next" value="{{ next }}" />
+    </div>
   </form>
-  <p>Don't have an account?<a href="{% url 'register' %}">Click here to register</a></p>
-  <p><a href="{% url 'password_reset' %}">Forgotten your password</a></p>
+  <div class="col-xs-4 col-lg-5">
+    <div class="well well-lg">
+      <div class="text-center">
+        <p>Don't have an account? <a href="{% url 'register' %}"></p>
+        <p>Click here to join</a></p>
+        <p>Forgotten your password?</p>
+        <p><a href="{% url 'password_reset' %}">Find password</a></p>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
