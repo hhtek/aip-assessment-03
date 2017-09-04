@@ -1,16 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
-  <h2>Welcome</h2>
+<div class="text-center">
+  <h2>Register</h2>
   <p>Please enter your details below. After clicking Sign Up we'll send you a confirmation email.</p>
-  <p>Already a member? <a href="{% url 'login' %}">Click here to sign in.</a></p>
-<div>
+</div>
+  <div class="row">
   <form method="post" action="{% url 'register' %}">
+  <div class="col-xs-4 col-lg-8">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Sign up" />
+    <button class="btn btn-lg btn-primary" type="submit">Join in</button>
     <input type="hidden" name="next" value="{{ next }}" />
+  </div>
   </form>
-</di>
+    <div class="col-xs-4 col-lg-4">
+    	<div class="well well-lg">
+          <p>Already a member? </p>
+          <p><a href="{% url 'login' %}">Click here to sign in.</a></p>
+        </div>
+    </div>
+</div>
 {% endblock %}
