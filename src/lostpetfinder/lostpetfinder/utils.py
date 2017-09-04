@@ -14,8 +14,6 @@ Converts to lowercase. Also strips leading and trailing whitespace.
 """
 from django.utils.text import slugify
 
-#from shortener.models import KirrURL
-
 DONT_USE = ['create']
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
     """
@@ -61,8 +59,4 @@ def unique_slug_generator(instance, new_slug=None):
 # Activation key generator
 SHORTCODE_MIN = getattr(settings, "SHORTCODE_MIN", 35)
 def code_generator(size=SHORTCODE_MIN, chars=string.ascii_lowercase + string.digits):
-    # new_code = ''
-    # for _ in range(size):
-    #     new_code += random.choice(chars)
-    # return new_code
     return ''.join(random.choice(chars) for _ in range(size))

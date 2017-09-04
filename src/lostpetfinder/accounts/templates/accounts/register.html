@@ -5,7 +5,7 @@
   <h2>Register</h2>
   <p>Please enter your details below. After clicking Sign Up we'll send you a confirmation email.</p>
 </div>
-  <div class="row">
+<div class="row">
   <form method="post" action="{% url 'register' %}">
   <div class="col-xs-4 col-lg-8">
     {% csrf_token %}
@@ -14,11 +14,11 @@
     <input type="hidden" name="next" value="{{ next }}" />
   </div>
   </form>
-    <div class="col-xs-4 col-lg-4">
-    	<div class="well well-lg">
-          <p>Already a member? </p>
-          <p><a href="{% url 'login' %}">Click here to sign in.</a></p>
-        </div>
-    </div>
+  <div class="col-xs-4 col-lg-4">
+  	<div class="well well-lg">
+        <p>Already a member? </p>
+        <p><a href="{% url 'login' %}">Click here to sign in.</a></p>
+      </div>
+  </div>
 </div>
 {% endblock %}

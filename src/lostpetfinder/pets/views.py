@@ -94,7 +94,7 @@ class PetUpdateView(LoginRequiredMixin, UpdateView):
 
 # Pet deletion
 class PetDeleteView(LoginRequiredMixin, DeleteView):
-    success_url = reverse_lazy('pets:ownerpets-list') # Return to pets list
+    success_url = reverse_lazy('pets:list') # Return to pets list
 
     # Get pets owned by the authenticated user
     def get_queryset(self):
