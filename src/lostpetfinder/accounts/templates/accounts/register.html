@@ -9,6 +9,7 @@
   <form method="post" action="{% url 'register' %}">
   <div class="col-xs-4 col-lg-8">
     {% csrf_token %}
+    <p>hello</p>
     {{ form.as_p }}
     <button class="btn btn-lg btn-primary" type="submit">Join in</button>
     <input type="hidden" name="next" value="{{ next }}" />
