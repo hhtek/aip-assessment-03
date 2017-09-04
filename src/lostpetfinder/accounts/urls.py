@@ -13,12 +13,13 @@ from django.contrib.auth.views import (
     PasswordResetCompleteView,
 )
 
-from .views import RegisterView
+from accounts.views import RegisterView, activate_user_view
 
 urlpatterns = [
     url(r'^login/$', LoginView.as_view(template_name='accounts/login.html'), name='login'),
     url(r'^logout/$', LogoutView.as_view(next_page=reverse_lazy('login')), name='logout'),
     url(r'^register/$', RegisterView.as_view(), name='register'),
+    url(r'^activate/(?P<code>[a-z0-9].*)/$', activate_user_view, name='activate'),
     url(r'^finder/account/$', TemplateView.as_view(template_name='accounts/profile.html'), name='profile'),
 
     url(r'^password_change/$',
