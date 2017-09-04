@@ -20,10 +20,10 @@ def activate_user_view(request, code=None, *args, **kwargs):
                 profile.activated = True
                 profile.activation_key = None
                 profile.save()
-                return redirect('/login/')
+                return redirect('/account/login/')
 
     # invalid activation_key
-    return redirect("/login")
+    return redirect("/account/login")
 
 class RegisterView(CreateView):
     form_class = RegisterForm
@@ -32,5 +32,5 @@ class RegisterView(CreateView):
 
     def dispatch(self, *args, **kwargs):
         if self.request.user.is_authenticated():
-            return redirect('/logout/')
+            return redirect('/account/logout/')
         return super(RegisterView, self).dispatch(*args, **kwargs)

@@ -21,7 +21,7 @@ from django.urls import reverse_lazy
 from pets.views import LostPetListView, ReunitedPetsListView
 
 urlpatterns = [
-    url(r'^', include('accounts.urls')),
+    url(r'^account/', include('accounts.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
     url(r'^finder/pets/', include('pets.urls', namespace='pets')), # authenticated owner urls
