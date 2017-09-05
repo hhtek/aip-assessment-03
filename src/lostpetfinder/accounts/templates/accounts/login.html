@@ -13,11 +13,14 @@
     <p>Please login to see this page.</p>
   {% endif %}
 {% endif %}
+
 <div class="row">
-  <form class="form-signin" method="post" action="{% url 'login' %}">{% csrf_token %}
-    <h2 class="form-signin-heading text-center">Log In</h2><br/>
-    <!--{{ form.as_p }}-->
-    <div class="col-xs-4 col-lg-6">
+  {% csrf_token %}
+  <div class="col-md-12">
+  <h2 class="form-signin-heading text-center">Log In</h2><br/>
+  </div>
+    <div class="col-md-6">
+      <form class="form-signin" method="post" action="{% url 'login' %}">
       <label for="{{ form.username.id_for_label }}">User Name :</label>
       <input class="form-control" id="{{ form.username.id_for_label }}" maxlength="15" name="{{ form.username.html_name }}" type="text" />
       <label for="{{ form.password.id_for_label }}">Password :</label>
@@ -26,9 +29,9 @@
         <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
       </div>
       <input type="hidden" name="next" value="{{ next }}" />
+      </form>
     </div>
-  </form>
-  <div class="col-xs-4 col-lg-5">
+  <div class="col-md-6">
     <div class="well well-lg">
       <div class="text-center">
         <p>Don't have an account? <a href="{% url 'register' %}"></p>
@@ -38,5 +41,4 @@
       </div>
     </div>
   </div>
-</div>
 {% endblock %}

@@ -15,6 +15,13 @@ class Pet(models.Model):
     PET_CHOICES = (
         ('Cat', 'Cat'),
         ('Dog', 'Dog'),
+        ('Rabbit','Rabbit'),
+        ('Pig','Pig'),
+        ('Bird','Bird'),
+        ('Ferret','Ferret'),
+        ('Horse','Horse'),
+        ('Sheep','Sheep'),
+        ('Turtle','Turtle'),
     )
     COLOUR_CHOICES = (
         ('Black', 'Black'),
