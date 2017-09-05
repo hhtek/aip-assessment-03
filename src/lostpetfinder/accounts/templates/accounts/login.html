@@ -15,12 +15,13 @@
 {% endif %}
 
 <div class="row">
-  {% csrf_token %}
+  
   <div class="col-md-12">
   <h2 class="form-signin-heading text-center">Log In</h2><br/>
   </div>
     <div class="col-md-6">
       <form class="form-signin" method="post" action="{% url 'login' %}">
+      {% csrf_token %}
       <label for="{{ form.username.id_for_label }}">User Name :</label>
       <input class="form-control" id="{{ form.username.id_for_label }}" maxlength="15" name="{{ form.username.html_name }}" type="text" />
       <label for="{{ form.password.id_for_label }}">Password :</label>
