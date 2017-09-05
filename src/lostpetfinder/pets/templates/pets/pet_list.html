@@ -7,9 +7,15 @@
 <div class="row">
   {% for obj in object_list %}
   <div class="col-xs-6 col-lg-4">
+  <div class="card">
+  	<div class="text-center">
     <h2>{{ obj.name }}</h2>
-    <p>{{ obj.location }} {{obj.timestamp }} {{ obj.updated }}</p>
-    <p><a class="btn btn-default" href="{{ obj.get_absolute_url }}" role="button">View details &raquo;</a></p>
+    <p>Location : {{ obj.location }}</p>
+    <p> {{obj.timestamp }} </p>
+    <p>Updated : {{ obj.updated }}</p>
+    <p><a class="btn btn-outline-primary" href="{{ obj.get_absolute_url }}" role="button">View details &raquo;</a></p>
+    </div>
+    </div>
   </div>
   {% endfor %}
 </div>
