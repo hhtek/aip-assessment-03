@@ -7,6 +7,7 @@ from .views import (
     PetCreateView,
     PetUpdateView,
     PetDeleteView,
+    #PetCommentView,
 )
 app_name = 'pets'
 urlpatterns = [
@@ -16,4 +17,5 @@ urlpatterns = [
     url(r'^(?P<slug>[\w-]+)/edit/$', PetUpdateView.as_view(), name='update'),
     url(r'^(?P<slug>[\w-]+)/delete/$', PetDeleteView.as_view(), name='delete'),
     url(r'^(?P<slug>[\w-]+)/$', PetDetailView.as_view(), name='detail'),
+    #url(r'^(?P<slug>[\w-]+)/comment/$', PetCommentView.as_view(), name='add_comment')
 ]

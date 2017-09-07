@@ -15,13 +15,12 @@ from django.views.generic import (
     DeleteView,
 )
 
-from .forms import PetRegistrationForm
-
+from .forms import PetRegistrationForm, CommentForm
 from .models import Pet
 
 # Display list of pets
 class OwnerPetListView(ListView):
-    # Get pets owned by the authenticated user
+    # Get pets owned by the authenticated usser
     def get_queryset(self):
         return Pet.objects.filter(owner=self.request.user)
 
