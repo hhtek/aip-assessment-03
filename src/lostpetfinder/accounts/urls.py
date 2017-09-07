@@ -13,14 +13,15 @@ from django.contrib.auth.views import (
     PasswordResetCompleteView,
 )
 
-from accounts.views import RegisterView, activate_user_view
+from accounts.views import signup, activate
 
 urlpatterns = [
     url(r'^login/$', LoginView.as_view(template_name='accounts/login.html'), name='login'),
     url(r'^logout/$', LogoutView.as_view(next_page=reverse_lazy('login')), name='logout'),
-    url(r'^register/$', RegisterView.as_view(), name='register'),
-    url(r'^activate/(?P<code>[a-z0-9].*)/$', activate_user_view, name='activate'),
-    url(r'^finder/account/$', TemplateView.as_view(template_name='accounts/profile.html'), name='profile'),
+    url(r'^register/$', signup, name='register'),
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', activate, name='activate'),
+    url(r'^account-activation-sent/$', TemplateView.as_view(template_name='accounts/account_activation_sent.html'), name='account_activation_sent'),
+    url(r'^profile/$', TemplateView.as_view(template_name='accounts/profile.html'), name='profile'),
 
     url(r'^password_change/$',
         PasswordChangeView.as_view(template_name='accounts/password_change_form.html'),

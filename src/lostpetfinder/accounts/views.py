@@ -1,36 +1,54 @@
-from django.contrib.auth import get_user_model
-from django.http import Http404
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
 
-from accounts.forms import RegisterForm
+from accounts.forms import UserRegisterForm
+from accounts.tokens import account_activation_token
 from accounts.models import Profile
 
-User = get_user_model()
+def signup(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False # disable login
+            user.save()
+            current_site = get_current_site(request)
+            subject = 'Activate Your Account'
+            message = render_to_string('accounts/account_activation_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user),
+            })
+            user.email_user(subject, message)
+            return redirect('account_activation_sent')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'accounts/register.html', {'form': form})
 
-def activate_user_view(request, code=None, *args, **kwargs):
-    if code:
-        qs = Profile.objects.filter(activation_key=code)
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        qs = Profile.objects.filter(user=user)
         if qs.exists() and qs.count() == 1:
             profile = qs.first()
-            if not profile.activated:
-                user_ = profile.user
-                user_.is_active = True
-                user_.save()
-                profile.activated = True
-                profile.activation_key = None
+            if not profile.email_confirmed:
+                profile.email_confirmed = True
                 profile.save()
-                return redirect('/account/login/')
-
-    # invalid activation_key
-    return redirect("/account/login")
-
-class RegisterView(CreateView):
-    form_class = RegisterForm
-    template_name = 'accounts/register.html'
-    success_url = '/'
-
-    def dispatch(self, *args, **kwargs):
-        if self.request.user.is_authenticated():
-            return redirect('/account/logout/')
-        return super(RegisterView, self).dispatch(*args, **kwargs)
+        user.save()
+        login(request, user)
+        return redirect('pets:list') # Redirect to User's pets list
+    else:
+        return render(request, 'accounts/account_activation_invalid.html')

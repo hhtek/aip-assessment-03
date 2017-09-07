@@ -67,7 +67,7 @@ ROOT_URLCONF = 'lostpetfinder.urls'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/finder/pets'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # console/smtp
 
 TEMPLATES = [
     {

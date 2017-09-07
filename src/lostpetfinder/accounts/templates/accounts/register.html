@@ -1,24 +1,47 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="text-center">
-  <h2>Register</h2>
-  <p>Please enter your details below. After clicking Sign Up we'll send you a confirmation email.</p>
-</div>
-<div class="row">
-  <form method="post" action="{% url 'register' %}">
-  <div class="col-xs-4 col-lg-8">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-lg btn-primary" type="submit">Join in</button>
-    <input type="hidden" name="next" value="{{ next }}" />
+<div class="container">
+  <div class="row">
+    <h2>Register</h2>
+    <p>Please enter your details below. After clicking Join we'll send you a confirmation email.</p>
   </div>
-  </form>
-  <div class="col-xs-4 col-lg-4">
-  	<div class="well well-lg">
-        <p>Already a member? </p>
-        <p><a href="{% url 'login' %}">Click here to sign in.</a></p>
+  <div class="row">
+    <div class="col-xs-4 col-lg-4">
+      <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="fieldWrapper">
+                {{ field.errors }}
+                {{ field.label_tag }} {{ field }}
+                {% if field.help_text %}
+                <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+{% comment %}
+        {% for field in form %}
+          <div class="fieldWrapper">
+            {{ field.label_tag }}<br>
+            {{ field }}
+            <!-- {% if field.help_text %}
+              <small style="color: grey">{{ field.help_text }}</small>
+            {% endif %} -->
+            {% for error in field.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        {% endcomment %}
+        <button class="btn btn-lg btn-primary" type="submit">Join in</button>
+        <input type="hidden" name="next" value="{{ next }}" />
+      </form>
+    	<div class="well well-lg">
+          <p>Already a member? </p>
+          <p><a href="{% url 'login' %}">Click here to sign in.</a></p>
       </div>
+    </div>
   </div>
 </div>
 {% endblock %}
