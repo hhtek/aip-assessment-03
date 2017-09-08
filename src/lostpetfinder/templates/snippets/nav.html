@@ -1,4 +1,4 @@
-{# NAVIGATION BAR WITH BOOTSTRAP 4.0.0-beta #}
+<!-- NAVIGATION BAR WITH BOOTSTRAP 4.0.0-beta -->
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #f4511e;">
   <a class="navbar-brand" href="{% url 'home' %}">Lost Pet Finder</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,40 +56,3 @@
     </ul>
   </div>
 </nav>
-
-{% comment %}
-<!-- NAVIGATION BAR WITH BOOTSTRAP 3.3.7 -->
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <!-- <div class="collapse navbar-collapse"> -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Lost Pet Finder</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'lost-pets' %}">Lost Pets</a></li>
-        <li><a href="{% url 'reunited-pets' %}">Reunited Pets</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li> <a href="{% url 'contact' %}">Contact</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'pets:list' %}">My Pets</a></li>
-        <li><a href="{% url 'profile' %}">My Profile</a></li>
-        <li><a href="{% url 'logout' %}">Logout</a></li>
-        <li><a>Welcome: {{ user.username }}</a></li>
-        {% else %}
-        <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Login</a></li>
-        <li><a href="{% url 'register' %}">Join</a></li>
-        {% endif %}
-      </ul>
-    </div>
-  </div><!-- /.container-fluid -->
-</nav>
-{% endcomment %}
