@@ -16,7 +16,7 @@ def signup(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False # disable login
+            user.is_active = False # disable account
             user.save()
             current_site = get_current_site(request)
             subject = 'Activate Your Account'
@@ -40,15 +40,10 @@ def activate(request, uidb64, token):
         user = None
 
     if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
-        qs = Profile.objects.filter(user=user)
-        if qs.exists() and qs.count() == 1:
-            profile = qs.first()
-            if not profile.email_confirmed:
-                profile.email_confirmed = True
-                profile.save()
+        user.is_active = True # activate user
+        user.profile.email_confirmed = True
         user.save()
-        login(request, user)
+        login(request, user) # automatically login activated user
         return redirect('pets:list') # Redirect to User's pets list
     else:
         return render(request, 'accounts/account_activation_invalid.html')

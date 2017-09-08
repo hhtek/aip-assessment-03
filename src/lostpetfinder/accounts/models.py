@@ -14,15 +14,8 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-def post_save_user_receiver(sender, instance, created, *args, **kwargs):
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
-        profile, is_created = Profile.objects.get_or_create(user=instance)
-
-post_save.connect(post_save_user_receiver, sender=User)
-
-# @receiver(post_save, sender=User)
-# def update_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         # Profile.objects.create(user=instance)
-#         profile, is_created = Profile.objects.get_or_create(user=instance)
-#     instance.profile.save()
+        Profile.objects.get_or_create(user=instance)
+    instance.profile.save() # save_user_profile
