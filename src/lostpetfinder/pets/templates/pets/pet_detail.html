@@ -27,7 +27,12 @@
            <p>Colour: {{ object.colour }}</p>
         </div>
         <div class="col-md-4">
+          {% if not object.pet_image %}
           <img src=http://placehold.it/360x360/>
+          {% else %}
+          {{ object.pet_image.url }}
+          <img src="{{ object.pet_image.url }}" height="360" width="360" />
+          {% endif %}
         </div>
       </div>
      </div>

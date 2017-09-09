@@ -18,7 +18,8 @@ class PetRegistrationForm(forms.ModelForm):
             'microchipped_no',
             'missing_date',
             'status',
-            'description'
+            'description',
+            'pet_image',
         ]
         widgets = {
             'name': forms.TextInput(attrs={'class':'textinputclass'}), # widget connecting to CSS

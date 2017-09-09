@@ -15,8 +15,8 @@ from django.views.generic import (
     DeleteView,
 )
 
-from .forms import PetRegistrationForm, CommentForm
-from .models import Pet
+from pets.forms import PetRegistrationForm, CommentForm
+from pets.models import Pet
 
 # Display list of pets
 class OwnerPetListView(ListView):
@@ -44,7 +44,7 @@ class PetDetailView(DetailView):
 class PetCreateView(LoginRequiredMixin, CreateView):
     form_class = PetRegistrationForm
     template_name = 'pets/pet_form.html'
-    login_url = '/login/' # Redirect to login url if not authenticated
+    login_url = 'login' # Redirect to login url if not authenticated
 
     # Get pets owned by the authenticated user
     def get_queryset(self):
