@@ -3,7 +3,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q # filter using operators '&' or '|'
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-
 from django.core.urlresolvers import reverse
 
 # Django class base views
@@ -20,28 +19,39 @@ from pets.models import Pet
 
 # Display list of pets
 class OwnerPetListView(ListView):
-    # Get pets owned by the authenticated usser
+    """
+    Get pets owned by the authenticated usser
+    """
     def get_queryset(self):
         return Pet.objects.filter(owner=self.request.user)
 
 # Display list of pets
 class LostPetListView(ListView):
+    """
+    Get list of lost pets
+    """
     def get_queryset(self):
         return Pet.objects.filter(status__iexact='lost')
 
-# Display list of reunited-pets
 class ReunitedPetsListView(ListView):
+    """
+    Get list of reunited pets
+    """
     def get_queryset(self):
         return Pet.objects.filter(status__iexact='found')
 
-# Display specific pet details
 class PetDetailView(DetailView):
+    """
+    Get specific pet details
+    """
     def get_queryset(self):
         slug = self.kwargs.get('slug')
         return Pet.objects.filter(slug=slug)
 
-#  Pet registration
 class PetCreateView(LoginRequiredMixin, CreateView):
+    """
+    Pet registration
+    """
     form_class = PetRegistrationForm
     template_name = 'pets/pet_form.html'
     login_url = 'login' # Redirect to login url if not authenticated
@@ -69,8 +79,10 @@ class PetCreateView(LoginRequiredMixin, CreateView):
         context['title'] = 'Pet Registration'
         return context
 
-#  Pet update
 class PetUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    Update pet
+    """
     form_class = PetRegistrationForm
     template_name = 'pets/pet_form.html'
 
@@ -91,8 +103,10 @@ class PetUpdateView(LoginRequiredMixin, UpdateView):
         context['title'] = 'Update Pet'
         return context
 
-# Pet deletion
 class PetDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    Delete pet
+    """
     success_url = reverse_lazy('pets:list') # Return to pets list
 
     # Get pets owned by the authenticated user
