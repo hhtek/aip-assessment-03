@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q # filter using operators '&' or '|'
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, resolve
 
 # Django class base views
 from django.views.generic import (
@@ -30,8 +30,27 @@ class LostPetListView(ListView):
     """
     Get list of lost pets
     """
-    def get_queryset(self):
-        return Pet.objects.filter(status__iexact='lost')
+    def get_queryset(self, *args, **kwargs):
+        url_name = resolve(self.request.path).url_name
+
+        if(url_name == 'lost-pets'): # url: /pets
+            return Pet.objects.filter(status__iexact='lost')
+
+        if(url_name == 'reunited-pets'):
+            return Pet.objects.filter(status__iexact='found')
+
+        queryset = Pet.objects.exclude(status__iexact='registered')
+        query = self.request.GET.get('q')
+        if query:
+            search_list = queryset.filter(
+                Q(status__iexact=query)|
+                Q(name__icontains=query)|
+                Q(location__icontains=query)|
+                Q(pet_type__iexact=query)
+            ).distinct()
+            return search_list
+
+        return queryset
 
 class ReunitedPetsListView(ListView):
     """

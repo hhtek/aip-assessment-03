@@ -33,7 +33,8 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
     url(r'^finder/pets/', include('pets.urls', namespace='pets')), # authenticated owner urls
     url(r'^pets/$', LostPetListView.as_view(), name='lost-pets'),
-    url(r'^reunited-pets/$', ReunitedPetsListView.as_view(), name='reunited-pets'),
+    url(r'^reunited-pets/$', LostPetListView.as_view(), name='reunited-pets'),
+    url(r'^search/$', LostPetListView.as_view(), name='search-pets'),
     url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
     url(r'^contact/$', TemplateView.as_view(template_name='contact.html'), name='contact'),
     url(r'^api/pets/', include('pets.api.urls', namespace='pets-api')),
