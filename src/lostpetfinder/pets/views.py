@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.core.urlresolvers import reverse, resolve
 
-# Django class base views
+# Django generic class base views
 from django.views.generic import (
     ListView,
     DetailView,
@@ -17,47 +17,42 @@ from django.views.generic import (
 from pets.forms import PetRegistrationForm, CommentForm
 from pets.models import Pet
 
-# Display list of pets
-class OwnerPetListView(ListView):
+class PetListView(ListView):
     """
-    Get pets owned by the authenticated usser
-    """
-    def get_queryset(self):
-        return Pet.objects.filter(owner=self.request.user)
-
-# Display list of pets
-class LostPetListView(ListView):
-    """
-    Get list of lost pets
+    Get list of pets:
+        GET /finder/pets: get pets owned by authenticated user.
+        GET /pets: get pets with lost status.
+        GET /reunited-pets: get pets with found status.
+        GET pets/search/?q=[query]:
+            search pets with status, pet type, pet name, and location
     """
     def get_queryset(self, *args, **kwargs):
+        # get requested URL namespace
         url_name = resolve(self.request.path).url_name
 
-        if(url_name == 'lost-pets'): # url: /pets
+        if(url_name == 'list'): # GET /finder/pets/ (refer to pets.urls)
+            return Pet.objects.filter(owner=self.request.user)
+
+        if(url_name == 'lost-pets'): # GET /pets
             return Pet.objects.filter(status__iexact='lost')
 
-        if(url_name == 'reunited-pets'):
+        if(url_name == 'reunited-pets'): # GET /reunited-pets
             return Pet.objects.filter(status__iexact='found')
 
-        queryset = Pet.objects.exclude(status__iexact='registered')
-        query = self.request.GET.get('q')
-        if query:
-            search_list = queryset.filter(
-                Q(status__iexact=query)|
-                Q(name__icontains=query)|
-                Q(location__icontains=query)|
-                Q(pet_type__iexact=query)
-            ).distinct()
-            return search_list
+        if(url_name == 'search-pets'): # GET /pets/search/?q=[query]
+            # Exclude pet with registered status from search query
+            queryset = Pet.objects.exclude(status__iexact='registered')
 
-        return queryset
-
-class ReunitedPetsListView(ListView):
-    """
-    Get list of reunited pets
-    """
-    def get_queryset(self):
-        return Pet.objects.filter(status__iexact='found')
+            query = self.request.GET.get('q')
+            if query:
+                search_list = queryset.filter(
+                    Q(status__iexact=query)|
+                    Q(name__icontains=query)|
+                    Q(location__icontains=query)|
+                    Q(pet_type__iexact=query)
+                ).distinct()
+                return search_list
+            return queryset
 
 class PetDetailView(DetailView):
     """

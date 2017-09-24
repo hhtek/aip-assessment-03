@@ -21,10 +21,7 @@ from django.urls import reverse_lazy
 from django.conf import settings
 from django.conf.urls.static import static
 
-from pets.views import (
-    LostPetListView,
-    ReunitedPetsListView,
-)
+from pets.views import PetListView
 
 urlpatterns = [
     url(r'^account/', include('accounts.urls')),
@@ -32,9 +29,9 @@ urlpatterns = [
     url(r'^auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
     url(r'^finder/pets/', include('pets.urls', namespace='pets')), # authenticated owner urls
-    url(r'^pets/$', LostPetListView.as_view(), name='lost-pets'),
-    url(r'^reunited-pets/$', LostPetListView.as_view(), name='reunited-pets'),
-    url(r'^search/$', LostPetListView.as_view(), name='search-pets'),
+    url(r'^pets/$', PetListView.as_view(), name='lost-pets'),
+    url(r'^pets/search/$', PetListView.as_view(), name='search-pets'),
+    url(r'^reunited-pets/$', PetListView.as_view(), name='reunited-pets'),
     url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
     url(r'^contact/$', TemplateView.as_view(template_name='contact.html'), name='contact'),
     url(r'^api/pets/', include('pets.api.urls', namespace='pets-api')),
