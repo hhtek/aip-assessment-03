@@ -3,6 +3,8 @@ bin/
 include/
 pip-selfcheck.json
 note.txt
+untrack_files/
+src/lostpetfinder/lostpetfinder/settings/local.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
