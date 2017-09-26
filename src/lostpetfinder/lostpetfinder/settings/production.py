@@ -12,21 +12,36 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+from lostpetfinder.aws.conf import *
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&cqskd@5&1vul&jn72!)@d4=93r5q08#h+65qit5v#nyh0*j@-'
+SECRET_KEY = os.environ.get('SECRET_KEY', '&cqskd@5&1vul&jn72!)@d4=93r5q08#h+65qit5v#nyh0*j@-')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['lostpetfinder.herokuapp.com']
+#ALLOWED_HOSTS = ['lostpetfinder.herokuapp.com', '.lostpetfinderau.com']
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'lostpetfinderau@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Lost Pet Finder <no_reply@lostpetfinderau.com.au'
+
+ADMINS = (
+    ('Admin', 'lostpetfinderau@gmail.com')
+)
+MANAGERS = ADMINS
 
 # Application definition
 
@@ -37,6 +52,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
+    'rest_framework',
+    'accounts',
+    'pets',
 ]
 
 MIDDLEWARE = [
@@ -50,11 +69,15 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'lostpetfinder.urls'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/finder/pets'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # console/smtp
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,6 +103,11 @@ DATABASES = {
     }
 }
 
+# herokupapp database settings
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+# DATABASES['default']['CONN_MAX_AGE'] = 500
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -105,7 +133,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Australia/Sydney'
 
 USE_I18N = True
 
@@ -118,6 +146,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-LOGIN_REDIRECT_URL = '/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATICFILES_DIRS = [
+    STATIC_DIR,
+]
+
+"""
+SSL/TLS Settings
+"""
+CORS_REPLACE_HTTPS_REFERER      = True
+HOST_SCHEME                     = "https://"
+SECURE_PROXY_SSL_HEADER         = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT             = True
+SESSION_COOKIE_SECURE           = True
+CSRF_COOKIE_SECURE              = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
+SECURE_HSTS_SECONDS             = 1000000
+SECURE_FRAME_DENY               = True

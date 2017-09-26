@@ -3,6 +3,8 @@ bin/
 include/
 pip-selfcheck.json
 note.txt
+aws_ima_credentials.csv
+untrack_files/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

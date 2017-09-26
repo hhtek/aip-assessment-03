@@ -23,7 +23,7 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action="{% url 'search-pets' %}" method="GET" role="search">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="q" value="{{ request.GET.q }}">
+      <input class="form-control mr-sm-2" type="text" placeholder="Enter pet name, status, pet type, locaion to search ..." aria-label="Search" name="q" value="{{ request.GET.q }}">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
     <ul class="navbar-nav navbar-right">
