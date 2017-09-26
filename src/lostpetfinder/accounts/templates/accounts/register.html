@@ -1,4 +1,25 @@
 {% extends "base.html" %}
+{% block javascript %}
+  <script>
+    $("#id_test").change(function () {
+      var username = $(this).val();
+
+      $.ajax({
+        url: '/ajax/validate_username/',
+        data: {
+          'username': username
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("A user with this username already exists.");
+          }
+        }
+      });
+
+    });
+  </script>
+{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -8,9 +29,13 @@
   </div>
   <div class="row">
     <div class="col-xs-4 col-lg-4">
+    
       <form method="post" action="{% url 'register' %}">
+      <input type="text" required="" name="test" maxlength="150" id="id_test" autofocus="">
         {% csrf_token %}
+        {{ form.as_p }}
 
+        <!--
         {% for field in form %}
             <div class="fieldWrapper">
                 {{ field.errors }}
@@ -27,13 +52,13 @@
             {{ field }}
             <!-- {% if field.help_text %}
               <small style="color: grey">{{ field.help_text }}</small>
-            {% endif %} -->
+            {% endif %} >
             {% for error in field.errors %}
               <p style="color: red">{{ error }}</p>
             {% endfor %}
           </div>
         {% endfor %}
-        {% endcomment %}
+        {% endcomment %}-->
         <button class="btn btn-lg btn-primary" type="submit">Join in</button>
         <input type="hidden" name="next" value="{{ next }}" />
       </form>

@@ -41,22 +41,27 @@
 <p>Posted on {{ object.timestamp }}, Updated {{ object.updated|timesince }} ago.</p>
 
   <hr>
-  <h4>Comments</h4>
-  {% for comment in post.comments.all %}
-    <div class="comment">
-        <div class="date">{{ comment.created_date }}</div>
-        <strong>{{ comment.author }}</strong>
+  <h4><u>Comments</u></h4>
+  {% for comment in object.comments.all %}
+    <div class="comment">        
+    <hr>
+        <p><strong>{{ comment.author }}</strong></p>
         <p>{{ comment.text|linebreaks }}</p>
+        <div class="date">{{ comment.created_date }}</div>
+        <hr>
     </div>
     {% empty %}
     <p>No comments</p>
   {% endfor %}
-   <div class="input-group">
+   {% if user.is_authenticated %}
+    <div class="input-group">
       <input type="text" class="form-control" placeholder="Add a comment...">
       <span class="input-group-btn">
-       <a class="btn btn-secondary" href="#">Add Comment</a>
+      <a class="btn btn-secondary" href="#">Add Comment</a>
       </span>
     </div>
-
+      {% else %}
+    <p>! Register or Login to post comment !</p>
+    {% endif %}
 
 {% endblock %}

@@ -139,8 +139,8 @@ pre_save.connect(rl_pre_save_receiver, sender=Pet)
 #post_save.connect(rl_post_save_receiver, sender=Pet)
 
 class Comment(models.Model):
-    post = models.ForeignKey(Pet)
-    author = models.CharField(max_length=200)
+    post = models.ForeignKey('pets.Pet', related_name='comments')
+    author = models.CharField(max_length=50)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)

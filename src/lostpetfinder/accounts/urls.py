@@ -13,12 +13,13 @@ from django.contrib.auth.views import (
     PasswordResetCompleteView,
 )
 
-from accounts.views import signup, activate
+from accounts.views import signup, activate, validate_username
 
 urlpatterns = [
     url(r'^login/$', LoginView.as_view(template_name='accounts/login.html'), name='login'),
     url(r'^logout/$', LogoutView.as_view(next_page=reverse_lazy('login')), name='logout'),
     url(r'^register/$', signup, name='register'),
+    url(r'^ajax/validate_username/$', validate_username, name='validate_username'),
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', activate, name='activate'),
     url(r'^account-activation-sent/$', TemplateView.as_view(template_name='accounts/account_activation_sent.html'), name='account_activation_sent'),
     url(r'^profile/$', TemplateView.as_view(template_name='accounts/profile.html'), name='profile'),
