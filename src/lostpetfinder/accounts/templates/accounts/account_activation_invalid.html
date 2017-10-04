@@ -1,5 +1,22 @@
-{% extends 'base.html' %}
+{% extends 'base_accounts.html' %}
 
-{% block content %}
-  <p>The confirmation link was invalid, possibly because it has already been used.</p>
-{% endblock %}
+{% block head_title %}
+  Account activation failed | {{ block.super }}
+{% endblock head_title %}
+
+{% block div_card_header %}
+    <h4>Account activation failed</h4>
+{% endblock div_card_header %}
+
+{% block div_card_body %}
+  <div class="alert alert-danger" role="alert">
+    It looks like the activation link is expired or invalid!<br/>
+    Please check the activation email for correct link and try again.
+  </div>
+{% endblock div_card_body %}
+
+{% block div_card_footer %}
+  <div>
+    Don't have an account? <a href="{% url 'register' %}" class="card-link">Register</a>
+  </div>
+{% endblock div_card_footer %}

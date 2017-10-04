@@ -49,7 +49,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'widget_tweaks',
+
     'rest_framework',
+
     'accounts',
     'pets',
 ]
@@ -65,7 +69,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'lostpetfinder.urls'
-LOGIN_URL = '/login/'
+LOGIN_URL = '/account/login/'
 LOGIN_REDIRECT_URL = '/finder/pets'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # console/smtp
@@ -141,7 +145,6 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-print(MEDIA_ROOT)
 
 STATICFILES_DIRS = [
     STATIC_DIR,

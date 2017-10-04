@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% comment %}
+  Base HTML template for the account pages such as,
+  account registration, password reset, password change.
+{% endcomment %}
+
+{% load static %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center py-2">
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <div class="card">
+        <div class="card-header text-center card-title">
+          {% block div_card_header %}
+            <!-- account content header -->
+          {% endblock div_card_header %}
+        </div>
+        <div class="card-body">
+          {% block div_card_body %}
+            <!-- account content body-->
+          {% endblock div_card_body %}
+        </div> <!-- end card-body -->
+        <div class="card-footer text-muted text-center">
+          {% block div_card_footer %}
+            <!-- account content footer -->
+          {% endblock div_card_footer %}
+        </div> <!-- end card-footer -->
+      </div> <!-- end card -->
+    </div> <!-- end column -->
+  </div> <!-- end row -->
+{% endblock %}

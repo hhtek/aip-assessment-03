@@ -1,7 +1,27 @@
 {% extends "base.html" %}
 
-{% block head_title %}My Profile || {{ block.super }}{% endblock head_title %}
+{% load static %}
+
+{% block head_title %}Account  | {{ block.super }}{% endblock head_title %}
 
 {% block content %}
-<h3>My Profile</h3>
+  <div class='row'>
+    <div class='col-md-6'>
+      <div class='row'>
+        <div class='col-12'>
+          <h3 class='mt-0'>Personal Details</h3>
+          <p>Name: {{ user.get_full_name }}</p>
+          <p>Username: {{ user.username }}</p>
+          <p>Email: {{ user.email }}</p>
+          <p>Mobile Number: {{ user.profile.mobile_number }}</p>
+          <p>Address: {{ user.profile.address }}</p>
+          <a class="btn btn-primary" href="edit">Edit</a>
+          <a href="{% url 'password_change' %}">Change Password</a>
+          <div class="mt-4">
+            <a class="btn btn-danger" href="{% url 'deactivate' %}">Deactivate Account</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

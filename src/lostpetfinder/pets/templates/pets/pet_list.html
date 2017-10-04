@@ -14,9 +14,6 @@
     <p> {{obj.timestamp }} </p>
     <p>Updated : {{ obj.updated }}</p>
     <p><a class="btn btn-outline-primary" href="{{ obj.get_absolute_url }}" role="button">View details &raquo;</a> <br>Comments({{ obj.comments.count }})</p>
-    {% if user.is_authenticated and user == object.owner or user.is_staff %}
-    <a class="btn btn-outline-primary" href="#" role="button">Delete</a>
-    {% endif %}
     </div>
     </div>
   </div>

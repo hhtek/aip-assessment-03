@@ -1,45 +1,24 @@
-{% extends "base.html" %}
+{% extends "base_accounts.html" %}
 
-{% block content %}
+{% block head_title %}Login | {{ block.super }}{% endblock head_title %}
 
-{% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
-{% if next %}
-  {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-  {% endif %}
-{% endif %}
+{% block div_card_header %}
+  <h4>Login</h4>
+{% endblock div_card_header %}
 
-<div class="row">
-  
-  <div class="col-md-12">
-  <h2 class="form-signin-heading text-center">Log In</h2><br/>
+{% block div_card_body %}
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% include 'form.html' %}
+    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+  </form>
+{% endblock div_card_body %}
+
+{% block div_card_footer %}
+  <div>
+    Don't have an account? <a href="{% url 'register' %}" class="card-link">Register</a>
   </div>
-    <div class="col-md-6">
-      <form class="form-signin" method="post" action="{% url 'login' %}">
-      {% csrf_token %}
-      <label for="{{ form.username.id_for_label }}">User Name :</label>
-      <input class="form-control" id="{{ form.username.id_for_label }}" maxlength="15" name="{{ form.username.html_name }}" type="text" />
-      <label for="{{ form.password.id_for_label }}">Password :</label>
-      <input class="form-control" id="{{ form.password.id_for_label }}" maxlength="20" name="{{ form.password.html_name }}" type="password" /><br/>
-      <div class="col-xs-4 col-lg-12 text-center">
-        <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
-      </div>
-      <input type="hidden" name="next" value="{{ next }}" />
-      </form>
-    </div>
-  <div class="col-md-6">
-    <div class="well well-lg">
-      <div class="text-center">
-        <p>Don't have an account? <a href="{% url 'register' %}"></p>
-        <p>Click here to join</a></p>
-        <p>Forgotten your password?</p>
-        <p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
-      </div>
-    </div>
+  <div>
+    <a href="{% url 'password_reset' %}" class="card-link">Forgot your password?</a>
   </div>
-{% endblock %}
+{% endblock div_card_footer %}

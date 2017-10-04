@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+
 {% block head_title %}Pets Details || {{ block.super }}{% endblock head_title %}
+
 {% block content %}
   <h1 class="text-center">Pet Details</h1>
   <!-- Check if the selected pet is owned by authenticated user -->
@@ -30,8 +32,7 @@
           {% if not object.pet_image %}
           <img src=http://placehold.it/360x360/>
           {% else %}
-          {{ object.pet_image.url }}
-          <img src="{{ object.pet_image.url }}" height="360" width="360" />
+            <img src="{{ object.pet_image.url }}" height="360" width="360" />
           {% endif %}
         </div>
       </div>
@@ -43,7 +44,7 @@
   <hr>
   <h4><u>Comments</u></h4>
   {% for comment in object.comments.all %}
-    <div class="comment">        
+    <div class="comment">
     <hr>
         <p><strong>{{ comment.author }}</strong></p>
         <p>{{ comment.text|linebreaks }}</p>
