@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Profile
+from accounts.models import Profile
 
 class UserRegisterForm(UserCreationForm):
     """
@@ -10,7 +10,7 @@ class UserRegisterForm(UserCreationForm):
     """
     email = forms.EmailField(
         max_length=254,
-        help_text='Required. Inform a valid email address.',
+        help_text='Required. Enter a valid email address.',
     )
     first_name = forms.CharField(max_length=30, required=True, help_text='Required')
     last_name = forms.CharField(max_length=30, required=True, help_text='Required')
@@ -28,14 +28,14 @@ class UserRegisterForm(UserCreationForm):
 
     def clean_email(self):
         """
-        Check if the email is already registered
+        Check that the email is already registered
         """
         email = self.cleaned_data.get('email')
         qs = User.objects.filter(email__iexact=email)
         if qs.exists():
             raise forms.ValidationError(f'This email address {email} \
                 is already registered with another account and it can not be used!')
-        return email
+        return email.lower()
 
     def clean_username(self):
         """
@@ -57,7 +57,7 @@ class ProfileForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     email = forms.EmailField(
         max_length=254,
-        help_text='Required. Inform a valid email address.',
+        help_text='Required. Enter a valid email address.',
     )
     first_name = forms.CharField(max_length=30, required=True, help_text='Required')
     last_name = forms.CharField(max_length=30, required=True, help_text='Required')
@@ -68,11 +68,15 @@ class UserForm(forms.ModelForm):
 
     def clean_email(self):
         """
-        Check if the email is already registered
+        Check that the email is already registered
         """
+        pk = self.instance.pk # get pk of requested UserForm
         email = self.cleaned_data.get('email')
-        qs = User.objects.filter(email__iexact=email)
-        if qs.exists():
+
+        # Get users queryset excluding requested user
+        users = User.objects.filter(email__iexact=email).exclude(pk=pk)
+
+        if users:
             raise forms.ValidationError(f'This email address {email} \
                 is already registered with another account and it can not be used!')
-        return email
+        return email.lower()

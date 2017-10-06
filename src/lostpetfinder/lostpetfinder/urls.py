@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
-    url(r'^finder/pets/', include('pets.urls', namespace='pets')), # authenticated owner urls
+    url(r'^finder/pets/', include('pets.urls', namespace='pets')),
     url(r'^pets/$', PetListView.as_view(), name='lost-pets'),
     url(r'^pets/search/$', PetListView.as_view(), name='search-pets'),
     url(r'^reunited-pets/$', PetListView.as_view(), name='reunited-pets'),

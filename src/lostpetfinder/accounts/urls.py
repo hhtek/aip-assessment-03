@@ -12,28 +12,46 @@ from django.contrib.auth.views import (
     PasswordResetConfirmView,
     PasswordResetCompleteView,
 )
+from accounts import views as account_view
 
-from accounts.views import register, activate, update_profile, deactivate
-
+"""
+General account URLs
+"""
 urlpatterns = [
     url(r'^login/$', LoginView.as_view(template_name='accounts/login.html'), name='login'),
     url(r'^logout/$', LogoutView.as_view(next_page=reverse_lazy('login')), name='logout'),
     url(r'^profile/$',
         TemplateView.as_view(template_name='accounts/profile.html'),
         name='profile'),
-    url(r'^profile/edit$', update_profile, name='edit'),
-    url(r'^profile/deactivate$', deactivate, name='deactivate'),
+    url(r'^profile/edit$', account_view.update_profile, name='edit'),
+    url(r'^profile/deactivate$', account_view.deactivate, name='deactivate'),
 ]
 
+"""
+Admin page URLs
+"""
 urlpatterns += [
-    url(r'^register/$', register, name='register'),
+    url(r'^admin/$', account_view.user_list, name='users_list'),
+    url(r'^admin/users/create/$', account_view.user_create, name='user_create'),
+    url(r'^admin/users/(?P<pk>\d+)/update/$', account_view.user_update, name='user_update'),
+    url(r'^admin/users/(?P<pk>\d+)/delete/$', account_view.user_delete, name='user_delete'),
+]
+
+"""
+Account registration URLs
+"""
+urlpatterns += [
+    url(r'^register/$', account_view.register, name='register'),
     url(r'^account-activation-sent/$',
         TemplateView.as_view(template_name='accounts/account_activation_sent.html'),
         name='account_activation_sent'),
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        activate, name='activate'),
+        account_view.activate, name='activate'),
 ]
 
+"""
+Password change URLs
+"""
 urlpatterns += [
     url(r'^password/$',
         PasswordChangeView.as_view(template_name='accounts/password_change.html'),
@@ -43,6 +61,9 @@ urlpatterns += [
         name='password_change_done'),
 ]
 
+"""
+Password reset URLs
+"""
 urlpatterns += [
     url(r'^reset/$',
         PasswordResetView.as_view(

@@ -10,7 +10,9 @@
   <form method="post" novalidate>
     {% csrf_token %}
     {% include 'form.html' %}
-    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+    <button type="submit" class="btn btn-primary btn-block">
+      <i class="fa fa-sign-in"></i> Log in
+    </button>
   </form>
 {% endblock div_card_body %}
 

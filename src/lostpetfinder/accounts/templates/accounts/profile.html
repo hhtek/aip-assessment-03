@@ -15,10 +15,15 @@
           <p>Email: {{ user.email }}</p>
           <p>Mobile Number: {{ user.profile.mobile_number }}</p>
           <p>Address: {{ user.profile.address }}</p>
-          <a class="btn btn-primary" href="edit">Edit</a>
-          <a href="{% url 'password_change' %}">Change Password</a>
+          <a class="btn btn-warning" href="{% url 'edit' %}">
+            <i class="fa fa-pencil"></i> Edit
+          </a>
+          <a href="{% url 'password_change' %}">
+            <i class="fa fa-key"></i> Change Password</a>
           <div class="mt-4">
-            <a class="btn btn-danger" href="{% url 'deactivate' %}">Deactivate Account</a>
+            <a class="btn btn-danger" href="{% url 'deactivate' %}">
+              <i class="fa fa-trash-o fa-lg"></i> Deactivate Account
+            </a>
           </div>
         </div>
       </div>

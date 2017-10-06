@@ -1,0 +1,29 @@
+{% for user in users %}
+  <tr>
+    <td>{{ user.id }}</td>
+    <td>{{ user.username }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.first_name }}</td>
+    <td>{{ user.last_name }}</td>
+    <td>{{ user.is_active }}</td>
+    <td>{{ user.is_staff }}</td>
+    <td>
+      <button type="button"
+        class="btn btn-warning btn-sm js-update-user"
+        data-url="{% url 'user_update' user.id %}">
+        <i class="fa fa-pencil fa-fw"></i> Edit
+      </button>
+    </td>
+    <td>
+      <button type="button"
+        class="btn btn-danger btn-sm js-delete-user"
+        data-url="{% url 'user_delete' user.id %}">
+        <i class="fa fa-trash-o fa-fw"></i> Delete
+      </button>
+    </td>
+  </tr>
+  {% empty %}
+  <tr>
+    <td colspan="7" class="text-center bg-warning">No user</td>
+</tr>
+{% endfor %}

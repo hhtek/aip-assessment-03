@@ -5,7 +5,6 @@ from django.dispatch import receiver
 
 class Profile(models.Model):
     user            = models.OneToOneField(User, on_delete=models.CASCADE)
-    email_confirmed = models.BooleanField(default=False)
     mobile_number   = models.CharField(max_length=10, null=True, blank=True)
     address         = models.CharField(max_length=300, null=True, blank=True)
     timestamp       = models.DateTimeField(auto_now_add=True)

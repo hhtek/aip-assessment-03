@@ -2,14 +2,16 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
-from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
 
 from accounts.forms import UserRegisterForm, ProfileForm, UserForm
 from accounts.tokens import account_activation_token
 from accounts.models import Profile
+
 
 def register(request):
     """
@@ -48,7 +50,6 @@ def activate(request, uidb64, token):
 
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True # activate user
-        user.profile.email_confirmed = True
         user.save()
         login(request, user) # automatically login activated user
         return redirect('pets:list') # Redirect to User's pets list
@@ -88,3 +89,81 @@ def deactivate(request):
 
     return render(request,
         template_name='accounts/account_confirm_deactivate.html')
+
+@login_required(login_url='/account/login/')
+def user_list(request):
+    """
+    Display list of users for amin page.
+    Only super user have access to this users list view.
+    """
+    if request.user.is_superuser:
+        users = User.objects.all()
+        return render(request, 'accounts/admin_user_list.html', {'users': users})
+    return redirect('pets:list')
+
+def save_user_form(request, form, template_name):
+    """
+    User update function to save the form data executed by super user.
+    Usage: admin page
+    """
+    data = dict()
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+            users = User.objects.all()
+            data['html_user_list'] = render_to_string('accounts/admin_partial_user_list.html', {
+                'users': users
+            })
+        else:
+            data['form_is_valid'] = False
+
+    context = {'form': form}
+    data['html_form'] = render_to_string(template_name,context,request=request)
+    return JsonResponse(data)
+
+@login_required(login_url='/account/login/')
+def user_create(request):
+    """
+    User creation function view for admin page
+    """
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+    else:
+        form = UserRegisterForm
+    return save_user_form(request, form, 'accounts/admin_partial_user_create.html')
+
+@login_required(login_url='/account/login/')
+def user_update(request, pk):
+    """
+    User updation function view for admin page
+    """
+    user = get_object_or_404(User, pk=pk)
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=user)
+    else:
+        form = UserForm(instance=user)
+    return save_user_form(request, form, 'accounts/admin_partial_user_update.html')
+
+@login_required(login_url='/account/login/')
+def user_delete(request, pk):
+    """
+    User deletion for admin page
+    """
+    user = get_object_or_404(User, pk=pk)
+    data = dict()
+    if request.method == 'POST':
+        user.delete()
+        data['form_is_valid'] = True
+        users = User.objects.all()
+        data['html_user_list'] = render_to_string('accounts/admin_partial_user_list.html', {
+            'users': users
+        })
+    else:
+        context = {'user': user}
+        data['html_form'] = render_to_string('accounts/admin_partial_user_delete.html',
+            context,
+            request=request,
+        )
+    return JsonResponse(data)
