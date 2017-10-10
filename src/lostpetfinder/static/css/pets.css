@@ -1,0 +1,18 @@
+h1{
+    text-decoration: underline;
+}
+.lol{
+    background-color: #5C6BC0;
+}
+.details{
+    background-color: #f5f3f3;
+}
+.head_name{
+    font-size: 40px;
+}
+.status{
+    font-size: 50%;
+}
+.right{
+    float:right;
+}

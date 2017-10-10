@@ -1,5 +1,5 @@
 from django import forms
-from pets.models import Pet, Comment
+from pets.models import Pet
 
 class PetRegistrationForm(forms.ModelForm):
     class Meta:
@@ -29,10 +29,3 @@ class PetRegistrationForm(forms.ModelForm):
     # Passing key word argurments to PetRegistrationForm
     def __init__(self, user=None, *args, **kwargs):
         super(PetRegistrationForm, self).__init__(*args, **kwargs)
-
-
-class CommentForm(forms.ModelForm):
-
-    class Meta:
-        model = Comment
-        fields = ('author', 'text',)

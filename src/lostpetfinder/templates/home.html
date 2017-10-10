@@ -13,8 +13,13 @@
     <p><a href={% url "pets:create" %} class="btn btn-primary">Find Your Pet</a></p>
   </div>
   <div class="col-xs-10 col-lg-6">
+  {% if user.is_authenticated %}
+    <h2>Pet List</h2>
+    <p><a href="{% url 'lost-pets' %}" class="btn btn-primary">View</a></p>
+      {% else %}
     <h2>Join in!</h2>
     <p><a href="{% url "register" %}" class="btn btn-primary">JOIN</a></p>
+      {% endif %}
   </div>
 </div>
 {% endblock content %}

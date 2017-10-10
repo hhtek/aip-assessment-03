@@ -14,7 +14,7 @@ from django.views.generic import (
     DeleteView,
 )
 
-from pets.forms import PetRegistrationForm, CommentForm
+from pets.forms import PetRegistrationForm
 from pets.models import Pet
 
 class PetListView(ListView):
@@ -133,17 +133,3 @@ class PetDeleteView(LoginRequiredMixin, DeleteView):
             get_context_data(*args, **kwargs)
         context['title'] = 'Remove Pet Listing'
         return context
-
-
-def add_comment_to_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = post
-            comment.save()
-            return redirect('pets.views.post_detail', pk=post.pk)
-    else:
-        form = CommentForm()
-    return render(request, 'pets/add_comment_to_post.html', {'form': form})
