@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% block head_title %}Pets List || {{ block.super }}{% endblock head_title %}
+{% block head_title %}{{ title }} || {{ block.super }}{% endblock head_title %}
 
 {% block content %}
-<h1>Pets List</h1>
+<h1>{{ title }}</h1>
 <p><a class="btn btn-primary" href="{% url "pets:create" %}">Register your new pet</a></p>
 <div class="row">
   {% for obj in object_list %}

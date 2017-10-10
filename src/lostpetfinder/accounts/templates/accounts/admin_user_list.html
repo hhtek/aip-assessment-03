@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% block head_title %}Users || {{ block.super }}{% endblock head_title %}
+
 {% block javascript %}
   <script src="{% static 'js/accounts_users.js' %}"></script>
 {% endblock %}

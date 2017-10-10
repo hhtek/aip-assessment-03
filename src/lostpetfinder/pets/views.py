@@ -54,6 +54,24 @@ class PetListView(ListView):
                 return search_list
             return queryset
 
+    # Get context data of page
+    def get_context_data(self, *args, **kwargs):
+        context = super(PetListView, self).\
+            get_context_data(*args, **kwargs)
+
+        # get requested URL namespace
+        url_name = resolve(self.request.path).url_name
+        title = 'My Pets'
+
+        if(url_name == 'lost-pets'):
+            title = 'Lost Pets'
+        if(url_name == 'reunited-pets'):
+            title = 'Found Pets'
+
+        context['title'] = title
+
+        return context
+
 class PetDetailView(DetailView):
     """
     Get specific pet details
@@ -61,6 +79,20 @@ class PetDetailView(DetailView):
     def get_queryset(self):
         slug = self.kwargs.get('slug')
         return Pet.objects.filter(slug=slug)
+
+    def get_context_data(self, *args, **kwargs):
+        slug = self.kwargs.get('slug')
+        pet = Pet.objects.get(slug=slug)
+        petLatLng = pet.get_geolocation_data()
+
+        context = super(PetDetailView, self).\
+            get_context_data(*args, **kwargs)
+
+        context['title'] = pet.name
+        context['lat'] = petLatLng['lat']
+        context['lng'] = petLatLng['lng']
+
+        return context
 
 class PetCreateView(LoginRequiredMixin, CreateView):
     """
@@ -120,7 +152,12 @@ class PetUpdateView(LoginRequiredMixin, UpdateView):
 class PetDeleteView(LoginRequiredMixin, DeleteView):
     """
     Delete pet
-    """
+    """    # Get context data of the form
+    def get_context_data(self, *args, **kwargs):
+        context = super(PetCreateView, self).\
+            get_context_data(*args, **kwargs)
+        context['title'] = 'Pet Registration'
+        return context
     success_url = reverse_lazy('pets:list') # Return to pets list
 
     # Get pets owned by the authenticated user

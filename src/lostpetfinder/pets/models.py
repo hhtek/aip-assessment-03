@@ -1,4 +1,8 @@
 import os
+import requests
+import urllib.parse
+import json
+
 from django.conf import settings
 from django.core.urlresolvers import reverse, resolve
 from django.db import models
@@ -125,6 +129,25 @@ class Pet(models.Model):
     # Get absolute URL of pets:detail view
     def get_absolute_url(self):
         return reverse('pets:detail', kwargs={'slug': self.slug})
+
+    def get_geolocation_data(self):
+        API_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
+        url_params = {
+            'address': self.location,
+            'key': settings.GOOGLE_MAPS_API_KEY,
+        }
+        encoded_url_params = urllib.parse.urlencode(url_params)
+        url = f'{API_URL}?{encoded_url_params}'
+
+        response = requests.request('GET', API_URL, params=url_params)
+        json_data = response.json()
+        geo_location_data = {
+            "lat": json_data["results"][0]["geometry"]["location"]["lat"],
+            "lng": json_data["results"][0]["geometry"]["location"]["lng"]
+        }
+
+        return geo_location_data
+
 
     # title: aka of name field to be used with unique_slug_generator()
     @property

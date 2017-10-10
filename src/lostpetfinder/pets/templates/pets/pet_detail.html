@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 
-{% block head_title %}Pets Details || {{ block.super }}{% endblock head_title %}
-{% load staticfiles %}
+{% load static %}
+
+{% block head_title %}{{ title }} || {{ block.super }}{% endblock head_title %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/pets.css' %}">
+{% endblock %}
+
+<!-- {% load staticfiles %} -->
+
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/pets.css' %}">
+<!-- <link rel="stylesheet" href="{% static 'css/pets.css' %}"> -->
     <div class="row">
      <div class="col-md-12 details">
      <h1 class="text-center">Pet Details</h1>
@@ -39,9 +47,19 @@
           {% endif %}
         </div>
       </div>
-     </div>
     </div>
-
+</div>
 <p>Posted on {{ object.timestamp }}, Updated {{ object.updated|timesince }} ago.</p>
-
+<!-- Display google map based on location of model pet -->
+<div class="row">
+  <div class="col">
+    <div id="map" style="400px;height:400px;background:yellow"></div>
+    <div id="petLat" value="{{ lat }}" style="display: none;"></div>
+    <div id="petLng" value="{{ lng }}" style="display: none;"></div>
+    {% block javascript %}
+      <script src="{% static 'js/googlemap.js' %}"></script>
+    {% endblock %}
+  </div>
+</div>
+<!-- End of google map -->
 {% endblock %}
