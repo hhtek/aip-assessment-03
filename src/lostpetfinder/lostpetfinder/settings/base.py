@@ -22,6 +22,7 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '&cqskd@5&1vul&jn72!)@d4=93r5q08#h+65qit5v#nyh0*j@-'
+GOOGLE_MAPS_API_KEY = 'AIzaSyB5INsUoixGo-ZNaDjqrUX9VyGzE_8g_co'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

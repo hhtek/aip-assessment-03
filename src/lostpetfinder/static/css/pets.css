@@ -1,0 +1,21 @@
+#pets-item-details table .attribute {
+  width: 30%;
+  padding: 4px 10px;
+  border: none;
+  background-color: #f4511e;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 4px 0px 0px 4px;
+}
+
+#pets-item-details table .value {
+  padding: 4px 10px;
+  border: none;
+  background-color: #fff;
+  border-radius: 0px 4px 4px 0px;
+}
+
+#pets-item-map .panel-component {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}

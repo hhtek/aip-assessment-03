@@ -12,7 +12,7 @@ from django.contrib.auth.views import (
     PasswordResetConfirmView,
     PasswordResetCompleteView,
 )
-from accounts import views as account_view
+from accounts import views as accounts_views
 
 """
 General account URLs
@@ -23,30 +23,30 @@ urlpatterns = [
     url(r'^profile/$',
         TemplateView.as_view(template_name='accounts/profile.html'),
         name='profile'),
-    url(r'^profile/edit$', account_view.update_profile, name='edit'),
-    url(r'^profile/deactivate$', account_view.deactivate, name='deactivate'),
+    url(r'^profile/edit$', accounts_views.update_profile, name='edit'),
+    url(r'^profile/deactivate$', accounts_views.deactivate, name='deactivate'),
 ]
 
 """
 Admin page URLs
 """
 urlpatterns += [
-    url(r'^admin/$', account_view.user_list, name='users_list'),
-    url(r'^admin/users/create/$', account_view.user_create, name='user_create'),
-    url(r'^admin/users/(?P<pk>\d+)/update/$', account_view.user_update, name='user_update'),
-    url(r'^admin/users/(?P<pk>\d+)/delete/$', account_view.user_delete, name='user_delete'),
+    url(r'^admin/$', accounts_views.user_list, name='users_list'),
+    url(r'^admin/users/create/$', accounts_views.user_create, name='user_create'),
+    url(r'^admin/users/(?P<pk>\d+)/update/$', accounts_views.user_update, name='user_update'),
+    url(r'^admin/users/(?P<pk>\d+)/delete/$', accounts_views.user_delete, name='user_delete'),
 ]
 
 """
 Account registration URLs
 """
 urlpatterns += [
-    url(r'^register/$', account_view.register, name='register'),
+    url(r'^register/$', accounts_views.register, name='register'),
     url(r'^account-activation-sent/$',
         TemplateView.as_view(template_name='accounts/account_activation_sent.html'),
         name='account_activation_sent'),
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        account_view.activate, name='activate'),
+        accounts_views.activate, name='activate'),
 ]
 
 """

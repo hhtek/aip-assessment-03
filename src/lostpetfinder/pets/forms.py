@@ -23,7 +23,7 @@ class PetRegistrationForm(forms.ModelForm):
         ]
         widgets = {
             'name': forms.TextInput(attrs={'class':'textinputclass'}), # widget connecting to CSS
-            'missing_date': forms.SelectDateWidget,
+            # 'missing_date': forms.SelectDateWidget,
         }
 
     # Passing key word argurments to PetRegistrationForm
