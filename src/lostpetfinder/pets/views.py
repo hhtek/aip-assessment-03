@@ -91,6 +91,12 @@ class PetDetailView(DetailView):
         context['title'] = pet.name
         context['lat'] = petLatLng['lat']
         context['lng'] = petLatLng['lng']
+        if(pet.status.lower() == 'lost'):
+            context['bt_badge_css'] = "badge-danger"
+        if(pet.status.lower() == 'found'):
+            context['bt_badge_css'] = "badge-primary"
+        if(pet.status.lower() == 'registered'):
+            context['bt_badge_css'] = "badge-warning"
 
         return context
 

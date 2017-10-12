@@ -1,13 +1,12 @@
 from django.conf.urls import url
-from . import views
 from .views import (
     PetListView,
     PetDetailView,
     PetCreateView,
     PetUpdateView,
     PetDeleteView,
-    #PetCommentView,
 )
+
 app_name = 'pets'
 urlpatterns = [
     url(r'^$', PetListView.as_view(), name='list'),

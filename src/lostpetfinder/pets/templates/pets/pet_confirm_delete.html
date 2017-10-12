@@ -7,7 +7,7 @@
   <form action="" method="post">
     {% csrf_token %}
     <p>Are you sure you want to remove listing of the pet "{{ object.name }}"?</p>
-    <button type="submit" class="btn btn-danger">Confirm</button>
+    <button type="submit" class="btn btn-danger">Confirm delete</button>
     <a class='btn btn-default' href="{% url 'pets:detail' object.slug %}">Cancel</a>
   </form>
 {% endblock %}

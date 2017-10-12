@@ -1,5 +1,5 @@
 body {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 .logo {
@@ -16,5 +16,6 @@ body {
 }
 
 .card-title {
-  color: #f4511e;
+  /*color: #f4511e;*/
+  color: #283593;
 }

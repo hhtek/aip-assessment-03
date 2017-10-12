@@ -1,0 +1,47 @@
+<div class="row jumbotron">
+  <div class="col-md-12">
+    <h1 class="page-title">{{ title|upper }}</h1>
+    <ul class="list-inline">
+      <li class="list-inline-item badge badge-pill badge-primary">{{ object.pet_type }}</li>
+      <li class="list-inline-item badge badge-pill badge-info">{{ object.location }}</li>
+      <li class="list-inline-item badge badge-pill {{ bt_badge_css }}">{{ object.status }}</li>
+      {% if user.is_authenticated and user == object.owner %}
+        <li class="list-inline-item">
+          <a class="btn btn-outline-primary btn-sm" href="{{ object.get_absolute_url }}edit/">
+            <i class="fa fa-pencil fa-fw"></i> Edit</a>
+        </li>
+        <li class="list-inline-item">
+          <a class="btn btn-outline-danger btn-sm" href="{{ object.get_absolute_url }}delete/">
+            <i class="fa fa-trash-o fa-fw"></i> Delete</a>
+        </li>
+      {% endif %}
+    </ul>
+    <div class="row">
+      <div class="col-md-4 details">
+        {% ifequal object.status|lower "lost" %}
+        <p><span class="badge badge-danger">Missing Date:</span> {{ object.missing_date|date:'D, d M Y' }}</p>
+        {% endifequal %}
+        {% ifequal object.status|lower "found" %}
+        <p><span class="badge badge-info">Found Date:</span> {{ object.updated|date:'D, d M Y' }}</p>
+        {% endifequal %}
+        <p><span class="badge badge-info">Age:</span> {{ object.age }} years</p>
+        <p><span class="badge badge-info">Gender:</span> {{ object.gender }}</p>
+        <p><span class="badge badge-info">Desexed:</span> {{ object.desexed }}</p>
+        <p><span class="badge badge-info">Description:</span> {{ object.description }}</p>
+      </div> <!-- /.col-md-4 -->
+      <div class="col-md-4 details">
+        <p><span class="badge badge-info">Size:</span> {{ object.size }}</p>
+        <p><span class="badge badge-info">Colour:</span> {{ object.colour }}</p>
+        <p><span class="badge badge-info">Microchipped:</span> {{ object.microchipped }}</p>
+        <p><span class="badge badge-info">Collar:</span> {{ object.collar }}</p>
+      </div> <!-- /.col-md-4 -->
+      <div class="col-md-4">
+        {% if not object.pet_image %}
+        <img src=http://placehold.it/360x360/>
+        {% else %}
+          <img src="{{ object.pet_image.url }}" height="auto" width="100%" />
+        {% endif %}
+      </div> <!-- /.col-md-4 -->
+    </div> <!-- /.row -->
+  </div> <!-- /.col-md-12 -->
+</div> <!-- /.ow jumbotron -->

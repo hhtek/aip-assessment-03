@@ -159,5 +159,3 @@ def rl_pre_save_receiver(sender, instance, *args, **kwargs):
         instance.slug = unique_slug_generator(instance)
 
 pre_save.connect(rl_pre_save_receiver, sender=Pet)
-#post_save.connect(rl_post_save_receiver, sender=Pet)
-
