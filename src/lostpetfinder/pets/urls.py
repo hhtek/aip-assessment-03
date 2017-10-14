@@ -1,3 +1,6 @@
+"""
+URL routing of Pets application
+"""
 from django.conf.urls import url
 from .views import (
     PetListView,

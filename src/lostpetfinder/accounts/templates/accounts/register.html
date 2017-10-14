@@ -1,5 +1,11 @@
 {% extends "base_accounts.html" %}
 
+{% comment %}
+  [User Account Registration]
+  File name: register.html
+  Description: the user account registration
+{% endcomment %}
+
 {% block head_title %}Account Registration | {{ block.super }}{% endblock head_title %}
 
 {% block div_card_header %}
@@ -9,7 +15,7 @@
 {% block div_card_body %}
   <form method="post" novalidate>
     {% csrf_token %}
-    {% include 'form.html' %}
+    {% include 'snippets/form.html' %}
     <button type="submit" class="btn btn-primary btn-block">
       <i class="fa fa-sign-in"></i> Create an account
     </button>

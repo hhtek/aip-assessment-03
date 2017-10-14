@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 
+{% comment %}
+  [Admin Page]
+  File name: admin_user_list.html
+  Description: this HTML template is used to display a list of users
+               for admin page 'GET /account/admin/'.
+  URL: GET /account/admin/
+  Note: this comment block is needs to be placed after the template tag
+        {% extends ... %}.
+{% endcomment %}
+
 {% load static %}
 
 {% block head_title %}Users || {{ block.super }}{% endblock head_title %}
@@ -27,17 +37,17 @@
         <th>First Name</th>
         <th>Last Name</th>
         <th>Active</th>
-        <th>Staff Status</th>
+        <th>Staff Member</th>
       </tr>
     </thead>
     <tbody>
       {% include 'accounts/admin_partial_user_list.html' %}
     </tbody>
-  </table>
+  </table> <!-- /.table id="user-table" -->
   <div class="modal fade" id="modal-user"> <!-- start of the model -->
     <div class="modal-dialog">
       <div class="modal-content">
       </div>
-    </div>
+    </div> <!-- /.modal-dialog -->
   </div> <!-- end model -->
 {% endblock %}

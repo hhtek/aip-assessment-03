@@ -1,3 +1,12 @@
+"""
+Form classes which are used for accounts application.
+    UserRegisterForm: used for new account registration.
+    ProfileForm: used to render HTML form with user's extra information
+                 including mobile_number,address.
+    UserForm: used to redner HTML form with user's information including
+              first_name, last_name, email.
+
+"""
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User

@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
+{% comment %}
+  File name: pet_list.html
+  Description: the HTML file used to display a list of pets
+               which are used for the views of lost/found pets and user's pets.
+  Note: this comment block needs to be after the template tag {% extends ... %}.
+{% endcomment %}
+
 {% load static %}
 
 {% block head_title %}{{ title }} || {{ block.super }}{% endblock head_title %}
@@ -10,10 +17,9 @@
 
 {% block content %}
 <h1 class="page-title">{{ title }}</h1>
-<p>
-  <a class="btn btn-outline-primary"
-    href="{% url "pets:create" %}">Register your new pet</a>
-</p>
+<p><a class="btn btn-default" href="{% url "pets:create" %}">
+  <i class="fa fa-paw"></i> Register your new pet</a></p>
+<!-- Display list of pets in bootstrap card format -->
 <div class="row py-2">
   {% for obj in object_list %}
     <div class="col-xs-6 col-lg-4 py-2">
@@ -30,29 +36,21 @@
             {% ifequal obj.status|lower "lost" %}
               <p>Missing since
                 <span class="badge badge-pill badge-danger">
-                  {{ obj.missing_date|date:'D, d M Y' }}
-                </span>
-              </p>
+                  {{ obj.missing_date|date:'D, d M Y' }}</span></p>
             {% endifequal %}
             {% ifequal obj.status|lower "found" %}
               <p>Found on
                 <span class="badge badge-pill badge-primary">
-                  {{ obj.updated|date:'D, d M Y' }}
-                </span>
-              </p>
+                  {{ obj.updated|date:'D, d M Y' }}</span></p>
             {% endifequal %}
             {% ifequal obj.status|lower "registered" %}
               <p>Status
                 <span class="badge badge-pill badge-info">
-                  {{ obj.status|upper }}
-                </span>
-              </p>
+                  {{ obj.status|upper }}</span></p>
             {% endifequal %}
             <p>From
               <span class="badge badge-pill badge-info">
-                {{ obj.location }}
-              </span>
-            </p>
+                {{ obj.location }}</span></p>
           </div> <!-- /.card-text -->
           <p><a class="btn btn-outline-primary btn-sm"
             href="{{ obj.get_absolute_url }}"
@@ -62,4 +60,5 @@
     </div> <!-- /.col-xs-6 col-lg-4 py-2 -->
   {% endfor %}
 </div> <!-- /.row py-2 -->
+<!-- end displaying list of pets in bootstrap card format -->
 {% endblock %}

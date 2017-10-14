@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
+{% comment %}
+  File name: pet_detail.html
+  Description: the HTML file to display details of specific pet.
+  URL: GET /finder/pets/{slug-field}/
+  Note: this comment block needs to be after template tag {% extends ... %}.
+{% endcomment %}
+
 {% load static %}
 
 {% block head_title %}{{ title }} || {{ block.super }}{% endblock head_title %}
@@ -16,12 +23,12 @@
   <div class="row">
     <div class="col">
       <div id="map" style="400px;height:400px;background:yellow"></div>
-      <div id="petLat" value="{{ lat }}" style="display: none;"></div>
-      <div id="petLng" value="{{ lng }}" style="display: none;"></div>
+      <div id="petLat" value="{{ lat }}" hidden>{{ lat }}</div>
+      <div id="petLng" value="{{ lng }}" hidden>{{ lng }}</div>
       {% block javascript %}
         <script src="{% static 'js/googlemap.js' %}"></script>
       {% endblock %}
-    </div>
-  </div>
+    </div> <!-- /.col -->
+  </div> <!-- /.row -->
   <!-- End of pet google map location -->
 {% endblock %}

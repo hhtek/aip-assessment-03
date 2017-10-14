@@ -1,3 +1,4 @@
+<!-- user deletion confirmation form used for admin page with AJAX -->
 <form method="post" action="{% url 'user_delete' user.id %}" class="js-user-delete-form">
   {% csrf_token %}
   <div class="modal-header">
@@ -17,3 +18,4 @@
     </button>
   </div>
 </form>
+<!-- end of user deletion confirmation form used for admin page with AJAX -->

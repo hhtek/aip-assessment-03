@@ -1,4 +1,10 @@
+"""
+Custom activation token generator which is extended from
+PasswordResetTokenGenerator
 
+Reference:
+https://simpleisbetterthancomplex.com/tutorial/2017/02/18/how-to-create-user-sign-up-view.html#sign-up-with-confirmation-mail
+"""
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils import six
 

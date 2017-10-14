@@ -1,5 +1,15 @@
 {% extends "base_accounts.html" %}
 
+{% comment %}
+  [User Account Activation]
+  File name: account_activation_sent.html
+  Description: this HTML template is used to display a success message after
+               an user successfully register for new account. The message instructs
+               the user to check their email for the activation link to confirm
+               the account activation.
+  Note: this comment block needs to be placed after the template tag {% extends... %}.
+{% endcomment %}
+
 {% block head_title %}Account Registration | {{ block.super }}{% endblock head_title %}
 
 {% block div_card_header %}

@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
+{% comment %}
+  [Account Profile]
+  File name: profile.html
+  Description: display user profile details.
+  Note: this comment block needs to be placed after the template tag {% extends ... %}.
+{% endcomment %}
+
 {% load static %}
 
 {% block head_title %}Account  | {{ block.super }}{% endblock head_title %}
@@ -25,8 +32,8 @@
               <i class="fa fa-trash-o fa-lg"></i> Deactivate Account
             </a>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        </div><!-- /.col-12 -->
+      </div><!-- /.row -->
+    </div><!-- /.col-md-6 -->
+  </div> <!-- /.row -->
 {% endblock %}

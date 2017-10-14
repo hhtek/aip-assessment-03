@@ -1,18 +1,23 @@
-{# This pet_form.html is used for creating, updating, and deleting pet. #}
-
 {% extends "base.html" %}
+
+{% comment %}
+  File name: pet_form.html
+  Description: This pet_form.html is used for creating, updating a pet.
+{% endcomment %}
 
 {% block head_title %}{{ title }} || {{ block.super }}{% endblock head_title %}
 
 {% block content %}
   <form method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
-    {% include 'form.html' %}
+    {% include 'snippets/form.html' %}
    	{% url 'pets:create' as register_url %}
 	{% if request.get_full_path == register_url %}
-  		<button type="submit" class="btn btn-primary">Register</button>
+  		<button type="submit" class="btn btn-primary">
+        <i class="fa fa-paw"></i> Register your new pet</button>
   	{% else %}
-  	  	<button type="submit" class="btn btn-primary">Update</button>
+  	  	<button type="submit" class="btn btn-primary">
+          <i class="fa fa-paw"></i> Update</button>
 	{% endif %}
     <a class='btn btn-default' href="{% url 'pets:list' %}">Cancel</a>
   </form>

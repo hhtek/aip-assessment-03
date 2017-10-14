@@ -1,5 +1,14 @@
 {% extends 'base_accounts.html' %}
 
+{% comment %}
+  [User Account Activation]
+  File name: account_activation_invalid.html
+  Description: this HTML template is used to display error/warning message
+               the user when the account activation link is invalid or expired,
+               the user does not exist, and user is already activated.
+  Note: this comment block needs to be placed after the template tag {% extends... %}.
+{% endcomment %}
+
 {% block head_title %}
   Account activation failed | {{ block.super }}
 {% endblock head_title %}
@@ -10,8 +19,13 @@
 
 {% block div_card_body %}
   <div class="alert alert-danger" role="alert">
-    It looks like the activation link is expired or invalid!<br/>
-    Please check the activation email for correct link and try again.
+    <p>
+      It looks like the activation link is expired or invalid!<br/>
+      Please check the activation email for correct link and try again.
+    </p>
+    <p>If you have already activated your account click
+      <a href="{% url 'login' %}">here</a> to login your account.
+    </p>
   </div>
 {% endblock div_card_body %}
 

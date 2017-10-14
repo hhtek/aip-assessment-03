@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 
+{% comment %}
+  File name: pet_confirm_delete.html
+  Description: the page is used to prompt user to confirm the deletion of
+               the specific pet.
+  Note: This comment block needs to be after {% extends ... %} template tag.
+{% endcomment %}
+
 {% block head_title %}{{ title }}|| {{ block.super }}{% endblock head_title %}
 
 {% block content %}
-  <h3>Remove Pet Listing Confirmation</h3>
+  <h2 class="page-title">Remove listing of the <strong>{{ object.pet_type }}: {{ object.name }}</strong>!</h2>
   <form action="" method="post">
     {% csrf_token %}
-    <p>Are you sure you want to remove listing of the pet "{{ object.name }}"?</p>
-    <button type="submit" class="btn btn-danger">Confirm delete</button>
+    <p>Are you sure you want to remove listing of the <strong>{{ object.pet_type }}: {{ object.name }}</strong>?</p>
+    <button type="submit" class="btn btn-danger">
+      <i class="fa fa-trash-o fa-lg"></i> Delete</button>
     <a class='btn btn-default' href="{% url 'pets:detail' object.slug %}">Cancel</a>
   </form>
 {% endblock %}

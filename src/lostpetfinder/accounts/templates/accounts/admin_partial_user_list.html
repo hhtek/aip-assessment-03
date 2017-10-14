@@ -1,3 +1,11 @@
+{% comment %}
+  [Admin Page]
+  File name: admin_partial_user_list.html
+  Description: this partial HTML template is used to generate a list of users
+               in table format for admin page 'GET /account/admin/'.
+               The template is included within admin_user_list.html.
+{% endcomment %}
+
 {% for user in users %}
   <tr>
     <td>{{ user.id }}</td>
@@ -5,8 +13,10 @@
     <td>{{ user.email }}</td>
     <td>{{ user.first_name }}</td>
     <td>{{ user.last_name }}</td>
-    <td>{{ user.is_active }}</td>
-    <td>{{ user.is_staff }}</td>
+    <td align="center">{% if user.is_active %}<i class="fa fa-check" style="color: #008000;"></i>
+      {% else %}<i class="fa fa-times" style="color: #FF0000;"></i>{% endif %}</td>
+    <td align="center">{% if user.is_staff %}<i class="fa fa-check" style="color: #008000;">
+      {% else %}<i class="fa fa-times" style="color: #FF0000;">{% endif %}</td>
     <td>
       <button type="button"
         class="btn btn-warning btn-sm js-update-user"
@@ -25,5 +35,5 @@
   {% empty %}
   <tr>
     <td colspan="7" class="text-center bg-warning">No user</td>
-</tr>
+  </tr>
 {% endfor %}

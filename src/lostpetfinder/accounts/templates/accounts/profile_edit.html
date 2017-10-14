@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 
+{% comment %}
+  [User Account Edit Form]
+  File name: profile_edit.html
+  Description: the HTML form allows an user to update their details including
+               first_name, last_name, email, mobile, and address.
+  Note: this comment block needs to be placed after the template tag {% extends ... %}.
+{% endcomment %}
+
 {% load form_tags widget_tweaks %}
 
 {% block head_title %}Edit profile | {{ block.super }}{% endblock head_title %}
@@ -8,13 +16,10 @@
   <div class="row">
     <div class="col-lg-6 col-md-8 col-sm-10">
       <div class="mt-2">
-        <h3 style="font-weight: 200;">Account<br/>
-          <small>Update your details</small>
-        </h3>
+        <h2 class="page-title">Update your profile></h2>
       </div>
       <form method="post" novalidate>
         {% csrf_token %}
-
         <!-- rendering user form fields -->
         {% if user_form.non_field_errors %}
           <div class="alert alert-danger" role="alert">
@@ -37,7 +42,7 @@
                 {{ field.help_text|safe }}
               </small>
             {% endif %}
-          </div> <!-- end form-group -->
+          </div> <!-- /.form-group -->
         {% endfor %}
         <!-- end rendering user form fields -->
 
@@ -63,7 +68,7 @@
                 {{ field.help_text|safe }}
               </small>
             {% endif %}
-          </div> <!-- end form-group -->
+          </div> <!-- /.form-group -->
         {% endfor %}
         <!-- end rendering user profile form -->
         <button type="submit" class="btn btn-primary">Save</button>

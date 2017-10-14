@@ -1,3 +1,7 @@
+"""
+Django's views definintions used to handle functions of the account application
+such as login, account registration, password reset, etc.
+"""
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -40,7 +44,11 @@ def register(request):
 
 def activate(request, uidb64, token):
     """
-    Activate new user account
+    Activate new user account after user click on the activation link sent to
+    their reigistered email address.
+        If the activation link is correct, logout current user, and
+            redirect to login page: GET /account/login/.
+        If the activation link is invalid, display activation failed message.
     """
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -48,11 +56,12 @@ def activate(request, uidb64, token):
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
 
-    if user is not None and account_activation_token.check_token(user, token):
+    if user is not None and not user.is_active and \
+        account_activation_token.check_token(user, token):
         user.is_active = True # activate user
         user.save()
-        login(request, user) # automatically login activated user
-        return redirect('pets:list') # Redirect to User's pets list
+        logout(request) # automatically logout current user.
+        return redirect('login') # redirect to login page
     else:
         return render(request, 'accounts/account_activation_invalid.html')
 

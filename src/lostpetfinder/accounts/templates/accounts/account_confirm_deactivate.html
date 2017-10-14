@@ -1,12 +1,24 @@
 {% extends "base.html" %}
 
+{% comment %}
+  [User Account Deletion]
+  File name: account_activation_deactivate.html
+  Description: this HTML template is used to display a warning/confirmation message
+               to user when they try to deactivate their account.
+  Note: this comment block needs to be placed after the template tag {% extends... %}.
+{% endcomment %}
+
 {% block head_title %}Deactivate Account|| {{ block.super }}{% endblock head_title %}
 
 {% block content %}
-  <h3>Account deactivation confirmation</h3>
+  <h2 class="page-title">Account deactivation confirmation!</h2>
+  <div class="alert alert-danger" role="alert">
+    <strong>Warning!</strong> Are you sure you want to deactivate your account?
+  </div>
   <form action="" method="post">{% csrf_token %}
-    <p>Are you sure you want to deactivate your account?</p>
-    <input class='btn btn-danger' type="submit" value="Confirm" />
+    <button class='btn btn-danger' type="submit">
+      <i class="fa fa-trash-o"></i> Confirm
+    </button>
     <a class='btn btn-default' href="{% url 'profile' %}">Cancel</a>
   </form>
 {% endblock %}

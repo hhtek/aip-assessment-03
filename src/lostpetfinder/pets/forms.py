@@ -1,7 +1,14 @@
+"""
+File name: forms.py
+Description: Django form classes which are used with 'pets' application.
+"""
 from django import forms
 from pets.models import Pet
 
 class PetRegistrationForm(forms.ModelForm):
+    """
+    Form definition which is used to to register and update pet.
+    """
     class Meta:
         model = Pet
         fields = [
@@ -22,10 +29,11 @@ class PetRegistrationForm(forms.ModelForm):
             'pet_image',
         ]
         widgets = {
-            'name': forms.TextInput(attrs={'class':'textinputclass'}), # widget connecting to CSS
-            # 'missing_date': forms.SelectDateWidget,
+            'missing_date': forms.SelectDateWidget,
         }
 
-    # Passing key word argurments to PetRegistrationForm
     def __init__(self, user=None, *args, **kwargs):
+        """
+        Passing key word argurments to PetRegistrationForm
+        """
         super(PetRegistrationForm, self).__init__(*args, **kwargs)

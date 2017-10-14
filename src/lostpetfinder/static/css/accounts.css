@@ -1,21 +1,8 @@
-body {
-  background-color: #ffffff;
-}
-
-.logo {
-  font-family: 'Cabin Condensed';
-}
-
-.logo a {
-  color: rgba(0,0,0,.9);
-}
-
-.logo a:hover,
-.logo a:active {
-  text-decoration: none;
-}
+/*
+  File name: account.css
+  Description: CSS style used for Accounts application.
+*/
 
 .card-title {
-  /*color: #f4511e;*/
-  color: #283593;
+    color: #283593;
 }

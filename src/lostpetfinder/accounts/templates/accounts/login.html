@@ -1,5 +1,12 @@
 {% extends "base_accounts.html" %}
 
+{% comment %}
+  [Account Login]
+  File name: login.html
+  Description: login HTML page
+  URL: GET /account/login/
+{% endcomment %}
+
 {% block head_title %}Login | {{ block.super }}{% endblock head_title %}
 
 {% block div_card_header %}
@@ -9,7 +16,7 @@
 {% block div_card_body %}
   <form method="post" novalidate>
     {% csrf_token %}
-    {% include 'form.html' %}
+    {% include 'snippets/form.html' %}
     <button type="submit" class="btn btn-primary btn-block">
       <i class="fa fa-sign-in"></i> Log in
     </button>
