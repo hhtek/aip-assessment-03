@@ -1,31 +1,157 @@
 # Lost Pet Finder
 
-TODO: Write a project description
+<p>The application is developed using Django Web Framework (https://www.djangoproject.com/).
+The application is intended to use by the pet owner who can register their pet,
+and list their pet online in the event that the pet is missing.</p>
+
+URL: https://lostpetfinder.herokuapp.com/
 
 ## Table of Contents
+1. [Application Usages](#application-usages)
+    * [Pet Owner](##pet-owner)
+    * [Administrator user](##administrator-user)
+    * [Others](##others)
 1. [Implementation](#implementation)
+    * [Application REST API](##application-rest-api)
+    * [Google Maps Geocoding Web Services](##google-maps-geocoding-web-ervices)
+    * [Heroku PaaS and Amazon S3 Storage](##heroku-paas-and-amazon-s3-storage)
+1. [Packages Requirement](#packages-requirement)
+1. [Installation](#installation)
 1. [Contributing](#contributing)
 1. [Coding Standards](#coding-standards)
-1. [History](#history)
 1. [References](#references)
-1. [License](#license)
+
+## Application Usages
+### Pet owner
+  * Register for new account with email based account activation.
+  * Update personal profile including name, email, mobile, and address.
+  * Change and reset password with email based password reset.
+  * Register for new pet, and list the pet as lost or found status.
+  * Update and delete their own pets.
+  * Deactivate the account if it is no longer needed.
+
+### Administrator user
+  * The administrator user has full access to the application including add, update,
+delete users and pets.
+  * Beside the built-in Django's admin site, the application also has a customised
+admin site that list all users that allow administrator to create an new user,
+edit user details such as name, email, as well as deleting specific user.
+
+### Others
+* The application has a search function to allow end-user to search for specific
+pet with the pet's name, status, pet type, and the lost location of the pet.
+
+**[Back to top](#table-of-contents)**
 
 ## Implementation
+The application is implemented with following features and connecting to following
+web services:
 
-### Dependencies
+### Application REST API
+External application can connect to the application using REST API as below:
+  * **GET all pets:** `GET /api/pets/`
+  * **Search pets:** `GET /api/pets/?q={search-query}`
+  * **Get a specific pet details:** `GET /api/pets/{slug}/` e.g. /api/pets/cute-cat-charles/
+  * **Update a specific pet:** `PUT /api/pets/{slug}/edit/` e.g. api/pets/cute-cat-charles/edit/
+  * **Delete a pet:** `DELETE /api/pets/{slug}/delete/` e.g. /api/pets/cute-cat-charles/delete/
 
-TODO: Describe the depenencies list, package requirements
+### Google Maps Geocoding Web Services
+The application is using **Google Maps Geocoding** to get the data of
+**latitude** and **longitude** of the pet's location, and display its missing
+location in Google Maps using Google Maps web service.
+
+### Heroku PaaS and Amazon S3 Storage
+<p>The application is deployed in Heroku cloud PaaS (https://www.heroku.com)
+for the simplicity of the deployment, with using Amazon S3 storage
+(https://aws.amazon.com) to store static files such as CSS, JavaScript files,
+and media files for pet's picture.</p>
+
+<p>The database which is used is **PostgreSQL** database, and it is installed
+during the deployment process in Heroku cloud PaaS.
+
+**[Back to top](#table-of-contents)**
+
+### Packages Requirement
+
+Followings are python packages which are used in the application:
+```
+boto3==1.4.7
+botocore==1.7.16
+certifi==2017.7.27.1
+chardet==3.0.4
+dj-database-url==0.4.2
+Django==1.11.4
+django-crispy-forms==1.6.1
+django-storages==1.6.5
+django-widget-tweaks==1.4.1
+djangorestframework==3.6.4
+docutils==0.14
+gunicorn==19.7.1
+idna==2.6
+jmespath==0.9.3
+olefile==0.44
+Pillow==4.2.1
+psycopg2==2.7.3
+Pygments==2.2.0
+python-dateutil==2.6.1
+pytz==2017.2
+requests==2.18.4
+s3transfer==0.1.11
+six==1.11.0
+urllib3==1.22
+```
+**[Back to top](#table-of-contents)**
 
 ### Installation
+#### Install Python
+Install the latest Python distribution. At the time of this writing,
+the latest version is **Python 3.6.3** (https://www.python.org/).
 
-TODO: Describe the installation process
+#### Install pip
+Install the latest version of **pip**, a tool to manage and install Python packages.
+Refer to https://pip.pypa.io/en/stable/installing/.
 
-### Usage
+#### Install *virtualenv*
+It is common that a Django project might need to install external libraries
+to support the development. Therefore, It is recommended to install **virtualenv**
+to run each Django project in each isolated virtual environment.
+The following is example of CLI run on Linux..
+```
+$ sudo pip3.6 install virtualenv
+```
 
-TODO: Write usage instructions
+#### Create a Project Folder and Activate *virtualenv*
+Create a project folder such as **trydjango-1-11**
+```
+$ mkdir trydjango-1-11 && cd trydjango-1-11
+$ virtualenv -p python3.6 . # creating 'virtualenv' in current directory
+$ source bin/activate # activating 'virtualenv'
+```
 
-### API
-TODO: List of APIs which are used in the project.
+#### Fork and Pull Git Repository
+Fork pull the git repository **git@github.com:hhtek/aip-assessment-03.git**
+to the project folder created in above step which is **trydjango-1-11**.
+```
+$ git init
+$ git pull <your git repository>
+e.g. git pull git@github.com:hhtek/aip-assessment-03.git
+```
+
+#### Install Project Packages
+The required python packages used for the application is listed in **src/lostpetfinder/requirements.txt**.
+```
+$ pip install -r src/lostpetfinder/requirements.txt
+```
+
+#### Start the Django local application server
+```
+$ python src/lostpetfinder/manage.py runserver
+```
+
+#### Open the application in web browser
+http://127.0.0.1:8000/
+
+**[Back to top](#table-of-contents)**
 
 ## Contributing
 
@@ -38,186 +164,22 @@ TODO: List of APIs which are used in the project.
 **[Back to top](#table-of-contents)**
 
 ## Coding Standards
-
-Describe the coding styles which are used in the project for readability and code maintenance.
-
-### Python
-
-Reference: https://www.python.org/dev/peps/pep-0008/
-
-1. Indentation using SPACES with the size of 4
-    ```python
-    urlpatterns = [
-        url(r'^$', PetListV iew.as_view(), name='list'),
-        url(r'^register/$', PetCreateView.as_view(), name='create'),
-        url(r'^(?P<pk>\d+)/edit/$', PetUpdateView.as_view(), name='update'),
-        url(r'^(?P<pk>\d+)/$', PetDetailView.as_view(), name='detail'),
-    ]
-    ```
-
-1. Use single quote for STRING
-    ```python
-    context['title'] = 'Update Pet'
-    template_name = 'pet-form.html'
-    ```
-
-1. Use trailing comma when listing the values, importing libraries line by line. For clarity, it is recommended to surround the latter line in (technically redundant) parentheses.
-    ```python
-    PET_CHOICES = (
-        ('Cat', 'Cat'),
-        ('Dog', 'Dog'),
-    )
-    # Django class base views
-    from django.views.generic import (
-        ListView,
-        DetailView,
-        CreateView,
-        UpdateView,
-    )
-    ```
-1. Tuple declaration<br/>
-    Tubple declaration with all CAPITAL LETTERS
-    ```python
-     PET_CHOICES = (
-         ('Cat', 'Cat'),
-         ('Dog', 'Dog'),
-     )
-    ```
-2. Use triple quote comment for group declarations such as list/tuple , fields, or multiple lines comment.
-    ```python
-    """
-    Pre-defined TUPLES
-    Tubple declaration with all CAPITAL LETTERS.
-    """
-    ```
-3. Imported libraries are categorised, sorted in alphabetical order, and separated by an empty line.<br/>
-    Below is an example of grouping django's libraries, and project's libraries/functions
-    ```python
-    from django.conf import settings
-    from django.core.urlresolvers import reverse
-    from django.db import models
-    from django.db.models.signals import pre_save, post_save
-
-    from lostpetfinder.utils import unique_slug_generator
-    ```
-### HTML & CSS
-
-Reference: https://google.github.io/styleguide/htmlcssguide.html
-
-1. Use a new line for every block, list, or table element, and indent every such child element.<br/>
-	Independent of the styling of an element (as CSS allows elements to assume a different role per display property), put every block, list, or table element on a new line.<br/>
-	Also, indent them if they are child elements of a block, list, or table element.<br/>
-	```
-	<blockquote>
-	<p><em>Space</em>, the final frontier.</p>
-	</blockquote>
-	```
-	```
-	<ul>
-	<li>Moe
-	<li>Larry
-	<li>Curly
-	</ul>
-	```
-	```
-	<table>
-	<thead>
-		<tr>
-		<th scope="col">Income
-		<th scope="col">Taxes
-	<tbody>
-		<tr>
-		<td>$ 5.00
-		<td>$ 4.50
-	</table>
-	```
-
-1. HTML Quotation Marks.<br/>
-	When quoting attributes values, use double quotation marks.<br/>
-	Use double ("") rather than single quotation marks ('') around attribute values.<br/>
-	```
-	<a class="maia-button maia-button-secondary">Sign in</a>
-	```
-
-1.  CSS Validity<br/>
-	Use valid CSS where possible.<br/>
-	Unless dealing with CSS validator bugs or requiring proprietary syntax, use valid CSS code.	<br/>
-
-1.  ID and Class Name Style<br/>
-	Use ID and class names that are as short as possible but as long as necessary.<br/>
-	Try to convey what an ID or class is about while being as brief as possible.<br/>
-	```
-	#nav {}
-	.author {}
-	```
-
-1. CSS Declaration Order<br/>
-	Alphabetize declaration
-	```
-	background: fuchsia;
-	border: 1px solid;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
-	color: black;
-	text-align: center;
-	text-indent: 2em;
-	```
-
-1. Block Content Indentation</br>
-	Indent all block content.
-	```
-	@media screen, projection {
-		html {
-			background: #fff;
-			color: #444;
-		}
-	}
-	```
-
-### JavaScript
-
-Reference: https://www.w3schools.com/js/js_conventions.asp
-
-1. 	Variable Names<br/>
-	All names start with a letter.
-	```
-	firstName = "John";
-	lastName = "Doe";
-	```
-
-1.	Spaces Around Operators<br/>
-	Always put spaces around operators ( = + - * / ), and after commas
-	```
-	var x = y + z;
-	var values = ["Volvo", "Saab", "Fiat"];
-	```
-
-1.	Code Indentation<br/>
-	4 spaces for indentation of code blocks
-	```
-	function toCelsius(fahrenheit) {
-		return (5 / 9) * (fahrenheit - 32);
-	}
-	```
-**[Back to top](#table-of-contents)**
-
-## History
-
-TODO: Write history
+Refer to [Coding Standards](CODINGSTANDARDS) for more details.
 
 **[Back to top](#table-of-contents)**
 
 ## References
+The application is written by following tutorials listed at following references:
 
-TODO: List of references which are used in this project
-https://www.codingforentrepreneurs.com/blog/go-live-with-django-project-and-heroku/
+1. https://www.codingforentrepreneurs.com/projects/try-django-111/
+1. https://www.codingforentrepreneurs.com/blog/go-live-with-django-project-and-heroku/
+1. https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
+1. https://simpleisbetterthancomplex.com/tutorial/2017/02/18/how-to-create-user-sign-up-view.html
+1. https://simpleisbetterthancomplex.com/tutorial/2016/11/15/how-to-implement-a-crud-using-ajax-and-json.html
+1. https://simpleisbetterthancomplex.com/series/2017/09/25/a-complete-beginners-guide-to-django-part-4.html
+1. https://simpleisbetterthancomplex.com/tutorial/2017/08/01/how-to-setup-amazon-s3-in-a-django-project.html
+1. https://www.caktusgroup.com/blog/2014/11/10/Using-Amazon-S3-to-store-your-Django-sites-static-and-media-files/
+1. http://www.django-rest-framework.org/
 
-
-**[Back to top](#table-of-contents)**
-
-## License
-
-TODO: Write license
 
 **[Back to top](#table-of-contents)**

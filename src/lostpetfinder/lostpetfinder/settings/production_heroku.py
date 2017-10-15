@@ -145,7 +145,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 # Amazon S3 setup for static assests
-# https://s3-ap-southeast-2.amazonaws.com/lpfau-static/cat.jpg
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'lpfau-static'
@@ -155,6 +154,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 AWS_LOCATION = 'static'
 
+# Tell applicatoin to get static file from https://lpfau-static.s3.amazonaws.com/static/.
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -162,7 +162,11 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
+# Tell the staticfiles app to use S3Boto3 storage when writing the collected static files
+# when running $python manage.py collectstatic
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+DEFAULT_FILE_STORAGE = 'lostpetfinder.storage_backends.MediaStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
