@@ -3,6 +3,7 @@
 bin/
 include/
 pip-selfcheck.json
+db.sqlite3
 lostpetfinder/settings/local.py
 
 # Byte-compiled / optimized / DLL files
