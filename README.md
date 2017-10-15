@@ -164,7 +164,7 @@ http://127.0.0.1:8000/
 **[Back to top](#table-of-contents)**
 
 ## Coding Standards
-Refer to [Coding Standards](CODINGSTANDARDS) for more details.
+Refer to [Coding Standards](CODINGSTANDARDS.md) for more details.
 
 **[Back to top](#table-of-contents)**
 
