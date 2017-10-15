@@ -1,12 +1,21 @@
-## Coding Standards
+# Coding Standards
 
-Describe the coding styles which are used in the project for readability and code maintenance.
+<p>The application is mainly written in Python programming language, and follow
+follow coding standards for ease of readability and code maintenance.</p>
 
-### Python
+<p>Refer to [README](README.md) for application implementation details.</p>
+
+
+## Table of Contents
+1. [Python](#python)
+1. [HTML and CSS](#html-and-css)
+1. [JavaScript](#javascript)
+
+## Python
 
 Reference: https://www.python.org/dev/peps/pep-0008/
 
-1. Indentation using SPACES with the size of 4
+1. Indentation using SPACES with the size of 4.
     ```python
     urlpatterns = [
         url(r'^$', PetListV iew.as_view(), name='list'),
@@ -16,10 +25,14 @@ Reference: https://www.python.org/dev/peps/pep-0008/
     ]
     ```
 
-1. Use single quote for STRING
+1. Use single quote for STRING.
     ```python
     context['title'] = 'Update Pet'
     template_name = 'pet-form.html'
+    ```
+1. Use double quote for long STRING.
+    ```python
+    long_string = "This is a long string"
     ```
 
 1. Use trailing comma when listing the values, importing libraries line by line. For clarity, it is recommended to surround the latter line in (technically redundant) parentheses.
@@ -44,14 +57,29 @@ Reference: https://www.python.org/dev/peps/pep-0008/
          ('Dog', 'Dog'),
      )
     ```
-2. Use triple quote comment for group declarations such as list/tuple , fields, or multiple lines comment.
+1. Use triple quote comment for group declarations such as list/tuple , fields or multiple lines comment.
     ```python
     """
     Pre-defined TUPLES
     Tubple declaration with all CAPITAL LETTERS.
     """
     ```
-3. Imported libraries are categorised, sorted in alphabetical order, and separated by an empty line.<br/>
+
+1. Each class or function have triple quote comment within and beginning of their code block.
+    ```python
+    class PetDetailView(DetailView):
+        """
+        Get specific pet details
+            GET /finder/pets/slug/
+        """
+        def get_queryset(self):
+            """
+            Get specific pet based on pet's slug
+            """
+            slug = self.kwargs.get('slug')
+            return Pet.objects.filter(slug=slug)    
+    ```
+1. Imported libraries are categorised, sorted in alphabetical order, and separated by an empty line.<br/>
     Below is an example of grouping django's libraries, and project's libraries/functions
     ```python
     from django.conf import settings
@@ -61,103 +89,141 @@ Reference: https://www.python.org/dev/peps/pep-0008/
 
     from lostpetfinder.utils import unique_slug_generator
     ```
-### HTML & CSS
+
+1. HTML template has multiline comment using django multiline comment block
+`{% comment %}{% endcomment %}`. The block needs to be placed after django template
+tag `{% extends ... %}`.
+    ```
+    {% extends "base.html" %}
+
+    {% comment %}
+      File name: pet_list.html
+      Description: the HTML file used to display a list of pets
+                   which are used for the views of lost/found pets and user's pets.
+      Note: this comment block needs to be after the template tag {% extends ... %}.
+    {% endcomment %}
+
+    {% load static %}
+
+    {% block head_title %}{{ title }} || {{ block.super }}{% endblock head_title %}
+    ```
+
+**[Back to top](#table-of-contents)**    
+
+## HTML and CSS
 
 Reference: https://google.github.io/styleguide/htmlcssguide.html
 
 1. Use a new line for every block, list, or table element, and indent every such child element.<br/>
-	Independent of the styling of an element (as CSS allows elements to assume a different role per display property), put every block, list, or table element on a new line.<br/>
-	Also, indent them if they are child elements of a block, list, or table element.<br/>
+  * Independent of the styling of an element (as CSS allows elements to assume a different role per display property), put every block, list, or table element on a new line.
+  * Also, indent them if they are child elements of a block, list, or table element.
+  * Use 2 spaces indentation for HTML and 4 spaces indentation for CSS.
 	```
-	<blockquote>
-	<p><em>Space</em>, the final frontier.</p>
-	</blockquote>
-	```
-	```
-	<ul>
-	<li>Moe
-	<li>Larry
-	<li>Curly
-	</ul>
+  	<blockquote>
+    	<p><em>Space</em>, the final frontier.</p>
+  	</blockquote>
 	```
 	```
-	<table>
-	<thead>
-		<tr>
-		<th scope="col">Income
-		<th scope="col">Taxes
-	<tbody>
-		<tr>
-		<td>$ 5.00
-		<td>$ 4.50
-	</table>
+  	<ul>
+    	<li>Moe</li>
+    	<li>Larry</li>
+    	<li>Curly</li>
+  	</ul>
+	```
+  ```
+    <table>
+      <thead>
+        <tr>
+        <th scope="col">Income</th>
+        <th scope="col">Taxes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+        <td>$ 5.00</td>
+        <td>$ 4.50</td>
+        </tr>
+      </tbody>
+    </table>
+  ```
+
+1. HTML Quotation Marks.
+  * When quoting attributes values, use double quotation marks ("") rather than
+  single quotation marks ("")
+  ```
+    <a class="maia-button maia-button-secondary">
+      Sign in
+    </a>
+  ```
+
+1. CSS Validity
+  * Use valid CSS where possible.
+  * Unless dealing with CSS validator bugs or requiring proprietary syntax, use valid CSS code.
+
+1. ID and Class Name Style
+  * Use ID and class names that are as short as possible but as long as necessary.
+  * Try to convey what an ID or class is about while being as brief as possible.
+  * Use 4 spaces indentation within curly bracket code block for readability.
+  ```
+    .card-title {
+        color: #283593;
+    }
+  ```
+
+1. CSS Declaration Order
+  * Alphabetise declaration
+  ```
+    .class-example {
+        background: fuchsia;
+        border: 1px solid;
+        border-radius: 4px;
+        color: black;
+        -moz-border-radius: 4px;
+        text-align: center;
+        text-indent: 2em;
+        -webkit-border-radius: 4px;
+    }
+  ```
+
+1. Block Content Indentation
+  * Indent all block content with 4 spaces.
+	```
+  	@media screen, projection {
+    		html {
+      			background: #fff;
+      			color: #444;
+    		}
+  	}
 	```
 
-1. HTML Quotation Marks.<br/>
-	When quoting attributes values, use double quotation marks.<br/>
-	Use double ("") rather than single quotation marks ('') around attribute values.<br/>
-	```
-	<a class="maia-button maia-button-secondary">Sign in</a>
-	```
+**[Back to top](#table-of-contents)**
 
-1.  CSS Validity<br/>
-	Use valid CSS where possible.<br/>
-	Unless dealing with CSS validator bugs or requiring proprietary syntax, use valid CSS code.	<br/>
-
-1.  ID and Class Name Style<br/>
-	Use ID and class names that are as short as possible but as long as necessary.<br/>
-	Try to convey what an ID or class is about while being as brief as possible.<br/>
-	```
-	#nav {}
-	.author {}
-	```
-
-1. CSS Declaration Order<br/>
-	Alphabetize declaration
-	```
-	background: fuchsia;
-	border: 1px solid;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
-	color: black;
-	text-align: center;
-	text-indent: 2em;
-	```
-
-1. Block Content Indentation</br>
-	Indent all block content.
-	```
-	@media screen, projection {
-		html {
-			background: #fff;
-			color: #444;
-		}
-	}
-	```
-
-### JavaScript
+## JavaScript
 
 Reference: https://www.w3schools.com/js/js_conventions.asp
 
-1. 	Variable Names<br/>
-	All names start with a letter.
-	```
-	firstName = "John";
-	lastName = "Doe";
-	```
+1. 	Variable Names
+  * All names start with a letter.
 
-1.	Spaces Around Operators<br/>
+  ```javascript
+  	firstName = "John";
+  	lastName = "Doe";
+  ```
+
+1.	Spaces Around Operators
 	Always put spaces around operators ( = + - * / ), and after commas
-	```
-	var x = y + z;
-	var values = ["Volvo", "Saab", "Fiat"];
+	```javascript
+  	var x = y + z;
+  	var values = ["Volvo", "Saab", "Fiat"];
 	```
 
-1.	Code Indentation<br/>
-	4 spaces for indentation of code blocks
+1.	Code Indentation
+  * Use 2 spaces for indentation of code blocks
+
+	```javascript
+  	function toCelsius(fahrenheit) {
+  		return (5 / 9) * (fahrenheit - 32);
+  	}
 	```
-	function toCelsius(fahrenheit) {
-		return (5 / 9) * (fahrenheit - 32);
-	}
-	```
+
+**[Back to top](#table-of-contents)**
