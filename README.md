@@ -8,13 +8,13 @@ URL: https://lostpetfinder.herokuapp.com/
 
 ## Table of Contents
 1. [Application Usages](#application-usages)
-    * [Pet Owner](##pet-owner)
-    * [Administrator user](##administrator-user)
-    * [Others](##others)
+    * [Pet Owner](#pet-owner)
+    * [Administrator user](#administrator-user)
+    * [Others](#others)
 1. [Implementation](#implementation)
-    * [Application REST API](##application-rest-api)
-    * [Google Maps Geocoding Web Services](##google-maps-geocoding-web-ervices)
-    * [Heroku PaaS and Amazon S3 Storage](##heroku-paas-and-amazon-s3-storage)
+    * [Application REST API](#application-rest-api)
+    * [Google Maps Geocoding Web Services](#google-maps-geocoding-web-ervices)
+    * [Heroku PaaS and Amazon S3 Storage](#heroku-paas-and-amazon-s3-storage)
 1. [Packages Requirement](#packages-requirement)
 1. [Installation](#installation)
 1. [Contributing](#contributing)
@@ -129,7 +129,7 @@ $ source bin/activate # activating 'virtualenv'
 ```
 
 #### Fork and Pull Git Repository
-Fork pull the git repository **git@github.com:hhtek/aip-assessment-03.git**
+Fork **git@github.com:hhtek/aip-assessment-03.git** and pull your git repository
 to the project folder created in above step which is **trydjango-1-11**.
 ```
 $ git init
