@@ -202,7 +202,7 @@ The application is written by following tutorials listed at following references
 ## Appendix
 ### Project File Structure
 <p>Below is the main file structure of the project.</p>
-```
+
 src/
 └── lostpetfinder
     ├── accounts
@@ -313,7 +313,6 @@ src/
             ├── form.html
             ├── navigation_bar.html
             ├── page_navigation.html
-            └── sidebar.html    
-```
+            └── sidebar.html
 
 **[Back to top](#table-of-contents)**
