@@ -3,6 +3,7 @@
 bin/
 include/
 pip-selfcheck.json
+src/lostpetfinder/db.sqlite3
 note.txt
 untrack_files/
 lostpetfinder/settings/production-heroku.py
