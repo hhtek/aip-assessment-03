@@ -1,6 +1,7 @@
 /*
   AJAX JavaScript functions which are used for admin page.
   Functions include create, update, and delete user.
+  Reference: https://simpleisbetterthancomplex.com/tutorial/2016/11/15/how-to-implement-a-crud-using-ajax-and-json.html
 */
 $(function () {
   /* Functions */

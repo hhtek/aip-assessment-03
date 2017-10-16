@@ -6,6 +6,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
@@ -15,6 +16,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from accounts.forms import UserRegisterForm, ProfileForm, UserForm
 from accounts.tokens import account_activation_token
 from accounts.models import Profile
+
 
 
 def register(request):
@@ -106,7 +108,19 @@ def user_list(request):
     Only super user have access to this users list view.
     """
     if request.user.is_superuser:
-        users = User.objects.all()
+        user_list = User.objects.all().order_by('pk')
+        paginator = Paginator(user_list, 10) # show 10 users per page
+
+        page = request.GET.get('page') # get current page# e.g. GET /account/admin/?page=1
+        try:
+            users = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            users = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            users = paginator.page(paginator.num_pages)
+
         return render(request, 'accounts/admin_user_list.html', {'users': users})
     return redirect('pets:list')
 

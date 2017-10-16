@@ -1,3 +1,8 @@
+{% comment %}
+  File name: base.html
+  Description: base HTML template that contain main structure of the application.
+{% endcomment %}
+
 {% load staticfiles %}<!DOCTYPE html>
 
 <html lang="en">
@@ -13,7 +18,7 @@
   </head>
   <body>
     {% block body %}
-      {% include 'snippets/nav.html' %} <!-- Navigation bar -->
+      {% include 'snippets/navigation_bar.html' %} <!-- Navigation bar -->
       <div class="container py-3"> <!-- Content block -->
         {% block content %}
           <!-- page content -->

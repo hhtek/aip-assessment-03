@@ -21,39 +21,39 @@
   <i class="fa fa-paw"></i> Register your new pet</a></p>
 <!-- Display list of pets in bootstrap card format -->
 <div class="row py-2">
-  {% for obj in object_list %}
+  {% for pet in pets %}
     <div class="col-xs-6 col-lg-4 py-2">
       <div class="card text-center">
-        {% if not obj.pet_image %}
+        {% if not pet.pet_image %}
           <img class="card-img-top rounded-circle" src="#">
         {% else %}
-          <img class="card-img-top rounded-circle" src="{{ obj.pet_image.url }}">
+          <img class="card-img-top rounded-circle" src="{{ pet.pet_image.url }}">
         {% endif %}
         <div class="card-body">
-          <h4 class="card-title">{{ obj.name|upper }}</h4>
-          <h6 class="card-subtitle mb-2 text-muted">{{ obj.pet_type }}</h6>
+          <h4 class="card-title">{{ pet.name|upper }}</h4>
+          <h6 class="card-subtitle mb-2 text-muted">{{ pet.pet_type }}</h6>
           <div class="card-text">
-            {% ifequal obj.status|lower "lost" %}
+            {% ifequal pet.status|lower "lost" %}
               <p>Missing since
                 <span class="badge badge-pill badge-danger">
-                  {{ obj.missing_date|date:'D, d M Y' }}</span></p>
+                  {{ pet.missing_date|date:'D, d M Y' }}</span></p>
             {% endifequal %}
-            {% ifequal obj.status|lower "found" %}
+            {% ifequal pet.status|lower "found" %}
               <p>Found on
                 <span class="badge badge-pill badge-primary">
-                  {{ obj.updated|date:'D, d M Y' }}</span></p>
+                  {{ pet.updated|date:'D, d M Y' }}</span></p>
             {% endifequal %}
-            {% ifequal obj.status|lower "registered" %}
+            {% ifequal pet.status|lower "registered" %}
               <p>Status
                 <span class="badge badge-pill badge-info">
-                  {{ obj.status|upper }}</span></p>
+                  {{ pet.status|upper }}</span></p>
             {% endifequal %}
             <p>From
               <span class="badge badge-pill badge-info">
-                {{ obj.location }}</span></p>
+                {{ pet.location }}</span></p>
           </div> <!-- /.card-text -->
           <p><a class="btn btn-outline-primary btn-sm"
-            href="{{ obj.get_absolute_url }}"
+            href="{{ pet.get_absolute_url }}"
             role="button">More Info &raquo;</a></p>
         </div> <!-- /.card-body -->
       </div> <!-- /.card text-center -->
@@ -61,4 +61,7 @@
   {% endfor %}
 </div> <!-- /.row py-2 -->
 <!-- end displaying list of pets in bootstrap card format -->
+<div class="d-flex justify-content-end">
+  {% include 'snippets/page_navigation.html' %}
+</div>
 {% endblock %}

@@ -4,7 +4,7 @@
 The application is intended to use by the pet owner who can register their pet,
 and list their pet online in the event that the pet is missing.</p>
 
-URL: https://lostpetfinder.herokuapp.com/
+Production URL: https://lostpetfinder.herokuapp.com/
 
 ## Table of Contents
 1. [Application Usages](#application-usages)
@@ -176,6 +176,7 @@ The application is written by following tutorials listed at following references
 1. https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
 1. https://simpleisbetterthancomplex.com/tutorial/2017/02/18/how-to-create-user-sign-up-view.html
 1. https://simpleisbetterthancomplex.com/tutorial/2016/11/15/how-to-implement-a-crud-using-ajax-and-json.html
+1. https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html
 1. https://simpleisbetterthancomplex.com/series/2017/09/25/a-complete-beginners-guide-to-django-part-4.html
 1. https://simpleisbetterthancomplex.com/tutorial/2017/08/01/how-to-setup-amazon-s3-in-a-django-project.html
 1. https://www.caktusgroup.com/blog/2014/11/10/Using-Amazon-S3-to-store-your-Django-sites-static-and-media-files/

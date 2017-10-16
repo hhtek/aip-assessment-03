@@ -8,6 +8,8 @@
   URL: GET /account/admin/
   Note: this comment block is needs to be placed after the template tag
         {% extends ... %}.
+  Page navigator code is sourced from
+  https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html
 {% endcomment %}
 
 {% load static %}
@@ -44,6 +46,33 @@
       {% include 'accounts/admin_partial_user_list.html' %}
     </tbody>
   </table> <!-- /.table id="user-table" -->
+  <!-- page navigation -->
+  <div class="d-flex justify-content-end">
+    {% if users.has_other_pages %}
+      <nav aria-label="Page Navigation">
+        <ul class="pagination justify-content-end">
+          {% if users.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+          {% else %}
+            <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+          {% endif %}
+          {% for i in users.paginator.page_range %}
+            {% if users.number == i %}
+              <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if users.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ users.next_page_number }}">&raquo;</a></li>
+          {% else %}
+            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+          {% endif %}
+        </ul> <!-- /.pagination justify-content-end -->
+      </nav> <!-- /.Page Navigation -->
+    {% endif %} {# endif users.has_other_pages #}
+  </div> <!-- /.d-flex justify-content-end -->
+  <!-- end page navigation -->
   <div class="modal fade" id="modal-user"> <!-- start of the model -->
     <div class="modal-dialog">
       <div class="modal-content">

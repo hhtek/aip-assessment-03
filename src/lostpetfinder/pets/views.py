@@ -31,6 +31,9 @@ class PetListView(ListView):
         GET pets/search/?q=[query]:
             search pets with status, pet type, pet name, and location
     """
+    context_object_name = 'pets' # change default object_list to pets
+    paginate_by = 6 # display 6 pets per page
+
     def get_queryset(self, *args, **kwargs):
         """
         Return a list of pets based on search filter

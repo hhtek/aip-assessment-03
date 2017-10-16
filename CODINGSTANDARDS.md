@@ -3,8 +3,7 @@
 <p>The application is mainly written in Python programming language, and follow
 follow coding standards for ease of readability and code maintenance.</p>
 
-<p>Refer to [README](README.md) for application implementation details.</p>
-
+Refer to [README](README.md) for application implementation details.
 
 ## Table of Contents
 1. [Python](#python)
@@ -118,18 +117,21 @@ Reference: https://google.github.io/styleguide/htmlcssguide.html
   * Independent of the styling of an element (as CSS allows elements to assume a different role per display property), put every block, list, or table element on a new line.
   * Also, indent them if they are child elements of a block, list, or table element.
   * Use 2 spaces indentation for HTML and 4 spaces indentation for CSS.
-	```
-  	<blockquote>
-    	<p><em>Space</em>, the final frontier.</p>
-  	</blockquote>
-	```
-	```
-  	<ul>
-    	<li>Moe</li>
-    	<li>Larry</li>
-    	<li>Curly</li>
-  	</ul>
-	```
+
+  ```
+    <blockquote>
+      <p><em>Space</em>, the final frontier.</p>
+    </blockquote>
+  ```
+
+  ```
+    <ul>
+      <li>Moe</li>
+      <li>Larry</li>
+      <li>Curly</li>
+    </ul>
+  ```
+
   ```
     <table>
       <thead>
@@ -187,14 +189,15 @@ Reference: https://google.github.io/styleguide/htmlcssguide.html
 
 1. Block Content Indentation
   * Indent all block content with 4 spaces.
-	```
-  	@media screen, projection {
-    		html {
-      			background: #fff;
-      			color: #444;
-    		}
-  	}
-	```
+
+  ```
+    @media screen, projection {
+        html {
+            background: #fff;
+            color: #444;
+        }
+    }
+  ```
 
 **[Back to top](#table-of-contents)**
 
@@ -206,8 +209,8 @@ Reference: https://www.w3schools.com/js/js_conventions.asp
   * All names start with a letter.
 
   ```javascript
-  	firstName = "John";
-  	lastName = "Doe";
+    firstName = "John";
+    lastName = "Doe";
   ```
 
 1.	Spaces Around Operators
@@ -220,10 +223,10 @@ Reference: https://www.w3schools.com/js/js_conventions.asp
 1.	Code Indentation
   * Use 2 spaces for indentation of code blocks
 
-	```javascript
-  	function toCelsius(fahrenheit) {
-  		return (5 / 9) * (fahrenheit - 32);
-  	}
-	```
+  ```javascript
+        function toCelsius(fahrenheit) {
+        return (5 / 9) * (fahrenheit - 32);
+    }
+  ```
 
 **[Back to top](#table-of-contents)**
