@@ -142,7 +142,7 @@ $ virtualenv -p python3.6 . # creating 'virtualenv' in current directory
 $ source bin/activate # activating 'virtualenv'
 ```
 
-#### Fork and Pull Git Repository
+#### Fork or Clone Git Repository
 Fork **git@github.com:hhtek/aip-assessment-03.git** and pull your git repository
 to the project folder created in above step which is **trydjango-1-11**.
 ```
@@ -150,6 +150,12 @@ $ git init
 $ git pull <your git repository>
 e.g. git pull git@github.com:hhtek/aip-assessment-03.git
 ```
+or
+```
+git clone git@github.com:hhtek/aip-assessment-03.git
+```
+**Note:** if you clone the project, install Python **virtualenv** in folder **/aip-assessment-03/**.
+Refer to [project file structure](#project-file-structure) for more details.
 
 #### Install Project Packages
 The required python packages used for the application is listed in **src/lostpetfinder/requirements.txt**.
