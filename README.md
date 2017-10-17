@@ -4,7 +4,8 @@
 The application is intended to use by the pet owner who can register their pet,
 and list their pet online in the event that the pet is missing.</p>
 
-Production URL: https://lostpetfinder.herokuapp.com/
+* Production URL: https://lostpetfinder.herokuapp.com/
+* Mobile device compatiblity.
 
 ## Table of Contents
 1. [Application Usages](#application-usages)
@@ -13,7 +14,7 @@ Production URL: https://lostpetfinder.herokuapp.com/
     * [Others](#others)
 1. [Implementation](#implementation)
     * [Application REST API](#application-rest-api)
-    * [Google Maps Geocoding Web Services](#google-maps-geocoding-web-ervices)
+    * [Google Maps Geocoding Web Services](#google-maps-geocoding-web-services)
     * [Heroku PaaS and Amazon S3 Storage](#heroku-paas-and-amazon-s3-storage)
     * [Database](#database)
 1. [Packages Requirement](#packages-requirement)
@@ -161,6 +162,17 @@ Refer to [project file structure](#project-file-structure) for more details.
 The required python packages used for the application is listed in **src/lostpetfinder/requirements.txt**.
 ```
 $ pip install -r src/lostpetfinder/requirements.txt
+```
+
+#### Run data migrations
+```
+$ python src/lostpetfinder/manage.py makemigrations
+$ python src/lostpetfinder/manage.py migrate
+```
+
+#### Create a supper user for admin access
+```
+$ python src/lostpetfinder/manage.py createsuperuser
 ```
 
 #### Start the Django local application server
