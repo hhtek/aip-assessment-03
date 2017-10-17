@@ -183,13 +183,16 @@ Refer to [Coding Standards](CODINGSTANDARDS.md) for more details.
 **[Back to top](#table-of-contents)**
 
 ## References
-The application is written by following tutorials listed at following references:
+The application is written by following tutorials and documentation listed at following references:
 
 1. https://www.codingforentrepreneurs.com/projects/try-django-111/
 1. https://www.codingforentrepreneurs.com/blog/go-live-with-django-project-and-heroku/
 1. https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
 1. https://simpleisbetterthancomplex.com/tutorial/2017/02/18/how-to-create-user-sign-up-view.html
 1. https://simpleisbetterthancomplex.com/tutorial/2016/11/15/how-to-implement-a-crud-using-ajax-and-json.html
+1. https://simpleisbetterthancomplex.com/tutorial/2016/08/29/how-to-work-with-ajax-request-with-django.html
+1. https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-14-04
+1. https://v4-alpha.getbootstrap.com/components
 1. https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html
 1. https://simpleisbetterthancomplex.com/series/2017/09/25/a-complete-beginners-guide-to-django-part-4.html
 1. https://simpleisbetterthancomplex.com/tutorial/2017/08/01/how-to-setup-amazon-s3-in-a-django-project.html
