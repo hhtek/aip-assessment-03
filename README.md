@@ -5,7 +5,12 @@ The application is intended to use by the pet owner who can register their pet,
 and list their pet online in the event that the pet is missing.</p>
 
 * Production URL: https://lostpetfinder.herokuapp.com/
-* Mobile device compatiblity.
+* Mobile device compatibility.
+
+**Notes:** This is a University Project using the free licenses of `Amazon S3 storage`
+and `Google Maps Geocoding Web Services`. The licenses already expired and the
+website is no longer displaying the photo of the pets and their Google map location.
+
 
 ## Table of Contents
 1. [Application Usages](#application-usages)
