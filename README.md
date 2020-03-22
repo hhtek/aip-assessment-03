@@ -149,16 +149,16 @@ $ source bin/activate # activating 'virtualenv'
 ```
 
 #### Fork or Clone Git Repository
-Fork **git@github.com:hhtek/aip-assessment-03.git** and pull your git repository
+Fork **git@github.com:henrydho/aip-assessment-03.git** and pull your git repository
 to the project folder created in above step which is **trydjango-1-11**.
 ```
 $ git init
 $ git pull <your git repository>
-e.g. git pull git@github.com:hhtek/aip-assessment-03.git
+e.g. git pull git@github.com:henrydho/aip-assessment-03.git
 ```
 or
 ```
-git clone git@github.com:hhtek/aip-assessment-03.git
+git clone git@github.com:henrydho/aip-assessment-03.git
 ```
 **Note:** if you clone the project, install Python **virtualenv** in folder **/aip-assessment-03/**.
 Refer to [project file structure](#project-file-structure) for more details.
